@@ -40,8 +40,6 @@
   <img src="assets/demo_activation.png" width="30%" alt="Menu Multi-Tool" />
   &nbsp;&nbsp;
   <img src="assets/demo_drawer.png" width="30%" alt="Navigasi Drawer & Modul" />
-  &nbsp;&nbsp;
-  <img src="assets/demo_locked_activation.png" width="30%" alt="Sistem Keamanan & Aktivasi" />
 </div>
 
 ---
