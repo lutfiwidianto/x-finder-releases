@@ -1,14 +1,7 @@
 {
   "masterAllowAll": false,
-  "killSwitch": true,
+  "killSwitch": false,
   "bannedDevices": [],
-  "licenses": [
-    {
-      "deviceId": "204B-1646-57DB-28D1",
-      "ownerName": "@pengguna",
-      "expiryDate": "lifetime",
-      "isBanned": false
-    }
-  ],
+  "licenses": [],
   "pendingRequests": []
 }
