@@ -2,5 +2,12 @@
   "masterAllowAll": false,
   "killSwitch": false,
   "bannedDevices": [],
-  "licenses": []
+  "licenses": [],
+  "pendingRequests": [
+    {
+      "deviceId": "204B-1646-57DB-28D1",
+      "username": "@pengguna",
+      "timestamp": "2026-09-30 16:24:55"
+    }
+  ]
 }
