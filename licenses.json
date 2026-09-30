@@ -1,6 +1,6 @@
 {
   "masterAllowAll": false,
-  "killSwitch": false,
+  "killSwitch": true,
   "bannedDevices": [],
   "licenses": [
     {
