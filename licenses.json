@@ -26,6 +26,12 @@
       "ownerName": "@xd_pay",
       "expiryDate": "2026-10-31",
       "isBanned": false
+    },
+    {
+      "deviceId": "",
+      "ownerName": "@Arj_mA",
+      "expiryDate": "lifetime",
+      "isBanned": false
     }
   ],
   "pendingRequests": [
@@ -35,13 +41,6 @@
       "telegramId": 5679060668,
       "name": "Arj Ma",
       "timestamp": "2026-10-01 08:01:14"
-    },
-    {
-      "deviceId": "",
-      "username": "@Arj_mA",
-      "telegramId": 5679060668,
-      "name": "Arj Ma",
-      "timestamp": "2026-10-01 11:51:00"
     }
   ]
 }
