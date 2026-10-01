@@ -26,15 +26,13 @@
       "ownerName": "@widianto_lutfi",
       "expiryDate": "2026-10-31",
       "isBanned": false
-    }
-  ],
-  "pendingRequests": [
+    },
     {
       "deviceId": "1F85-9C92-6A1A-120B",
-      "username": "@xd_pay",
-      "telegramId": 5617545647,
-      "name": "Admin XD",
-      "timestamp": "2026-10-01 04:05:15"
+      "ownerName": "@xd_pay",
+      "expiryDate": "2026-10-31",
+      "isBanned": false
     }
-  ]
+  ],
+  "pendingRequests": []
 }
