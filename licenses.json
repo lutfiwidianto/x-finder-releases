@@ -3,5 +3,13 @@
   "killSwitch": false,
   "bannedDevices": [],
   "licenses": [],
-  "pendingRequests": []
+  "pendingRequests": [
+    {
+      "deviceId": "C2EB-9858-8629-FBE8",
+      "username": "@xd_pay",
+      "telegramId": 5617545647,
+      "name": "Admin XD",
+      "timestamp": "2026-10-01 02:21:28"
+    }
+  ]
 }
