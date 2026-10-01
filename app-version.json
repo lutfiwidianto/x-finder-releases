@@ -1,7 +1,7 @@
 {
-  "latest_version": "2.4.1",
-  "version_code": 6,
-  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.4.1/x-finder.apk",
-  "release_notes": "X-Finder Pro v2.4.1 Pembaruan:\n- Fix Tombol Minta Izin Admin otomatis mengarah langsung ke Telegram Bot (@xfinder_auth_bot) via Deep-Link verifikasi akun asli.\n- Tampilan Original App Icon untuk aplikasi target yang terpasang di HP pada menu App Host Sniffer.\n- Pengelolaan Whitelist Sniffer langsung dari Telegram Bot (@xfinder_auth_bot).\n- Background Scanning & DPI Traffic Monitor.",
+  "latest_version": "2.4.2",
+  "version_code": 7,
+  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.4.2/x-finder.apk",
+  "release_notes": "X-Finder Pro v2.4.2 Pembaruan:\n- Fix Crash saat memulai Sniffer (ForegroundService Type dataSync)\n- Proteksi Izin Admin: Tombol terkunci otomatis jika belum di-whitelist oleh Admin Bot\n- Fitur Simpan Host .TXT: Simpan domain/SNI tertangkap ke file teks untuk scanning\n- Peningkatan stabilitas DPI Packet Inspector",
   "mandatory": false
 }
