@@ -28,5 +28,13 @@
       "isBanned": false
     }
   ],
-  "pendingRequests": []
+  "pendingRequests": [
+    {
+      "deviceId": "2096-F965-9506-C6B3",
+      "username": "@Arj_mA",
+      "telegramId": 5679060668,
+      "name": "Arj Ma",
+      "timestamp": "2026-10-01 08:01:14"
+    }
+  ]
 }
