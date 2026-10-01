@@ -36,5 +36,5 @@
   ],
   "pendingRequests": [],
   "snifferWhitelistedDevices": [],
-  "masterAllowSniffer": true
+  "masterAllowSniffer": false
 }
