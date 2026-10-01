@@ -2,15 +2,15 @@
   "masterAllowAll": false,
   "killSwitch": false,
   "bannedDevices": [],
-  "licenses": [],
-  "pendingRequests": [
+  "licenses": [
     {
       "deviceId": "C2EB-9858-8629-FBE8",
-      "username": "@xd_pay",
-      "telegramId": 5617545647,
-      "name": "Admin XD",
-      "timestamp": "2026-10-01 02:21:28"
-    },
+      "ownerName": "@xd",
+      "expiryDate": "2026-10-31",
+      "isBanned": false
+    }
+  ],
+  "pendingRequests": [
     {
       "deviceId": "194D-8DCA-E0BE-A9C2",
       "username": "@widianto_lutfi",
