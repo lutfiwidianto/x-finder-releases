@@ -1,7 +1,7 @@
 {
-  "latestVersion": "2.1",
-  "minRequiredVersion": "1.0",
-  "downloadUrl": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.1/x-finder.apk",
-  "releaseNotes": "X-Finder Pro v2.1:\n- Peningkatan performa & stabilitas multi-threaded scanner\n- Optimasi respon scanning Xray (Vless/Vmess) & SSH-WS\n- Sinkronisasi dan verifikasi lisensi perangkat otomatis\n- Tampilan antarmuka (UI) lebih bersih, ringan, dan responsif",
-  "updatedAt": "2026-10-01T09:42:00Z"
+  "latest_version": "2.2",
+  "version_code": 3,
+  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.2/x-finder.apk",
+  "release_notes": "X-Finder Pro v2.2:\n- Fitur Baru: Opsi Kunci SNI Asli (Static SNI) vs Dynamic Prefix ([target].[sni]) pada Mode Wildcard & Auto All Modes.\n- Perbaikan UI: Teks input kontras tinggi untuk seluruh versi Android (Android 7.0 s/d 16+).\n- Optimalisasi kecepatan probe & ekspor konfigurasi Clash YAML.",
+  "mandatory": false
 }
