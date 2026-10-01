@@ -4,12 +4,6 @@
   "bannedDevices": [],
   "licenses": [
     {
-      "deviceId": "C2EB-9858-8629-FBE8",
-      "ownerName": "@xd",
-      "expiryDate": "2026-10-31",
-      "isBanned": false
-    },
-    {
       "deviceId": "0363-8F67-FE6C-BEBE",
       "ownerName": "@d0oyoulovemee",
       "expiryDate": "2026-10-31",
