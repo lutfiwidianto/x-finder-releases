@@ -1,7 +1,7 @@
 {
-  "latest_version": "2.2",
-  "version_code": 3,
-  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.2/x-finder.apk",
-  "release_notes": "X-Finder Pro v2.2:\n- Fitur Baru: Opsi Kunci SNI Asli (Static SNI) vs Dynamic Prefix ([target].[sni]) pada Mode Wildcard & Auto All Modes.\n- Perbaikan UI: Teks input kontras tinggi untuk seluruh versi Android (Android 7.0 s/d 16+).\n- Optimalisasi kecepatan probe & ekspor konfigurasi Clash YAML.",
+  "latest_version": "2.3",
+  "version_code": 4,
+  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.3/x-finder.apk",
+  "release_notes": "X-Finder Pro v2.3:\n- Fitur Baru: In-App Background Streaming Downloader dengan live progress bar & Direct Auto-Install.\n- Default Mode Wildcard dikunci ke Static SNI (Kunci SNI Asli Akun V2Ray).\n- Perbaikan kontras warna teks di seluruh input form untuk Android 7.0 s/d 16+.",
   "mandatory": false
 }
