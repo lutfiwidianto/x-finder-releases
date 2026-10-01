@@ -16,13 +16,5 @@
       "isBanned": false
     }
   ],
-  "pendingRequests": [
-    {
-      "deviceId": "194D-8DCA-E0BE-A9C2",
-      "username": "@widianto_lutfi",
-      "telegramId": 1243202492,
-      "name": "\u2e19\uff2c\uff55\ud835\udc95\ud835\udc87\ud835\udc8a \u2301 \ud835\udc7e\ud835\udc8a\ud835\udc85\ud835\udc8a\ud835\udc82\ud835\udc8f\ud835\udc95\ud835\udc90\u2e19",
-      "timestamp": "2026-10-01 02:24:50"
-    }
-  ]
+  "pendingRequests": []
 }
