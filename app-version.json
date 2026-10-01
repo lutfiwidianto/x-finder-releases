@@ -2,6 +2,6 @@
   "latest_version": "2.4.2",
   "version_code": 7,
   "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.4.2/x-finder.apk",
-  "release_notes": "X-Finder Pro v2.4.2 Pembaruan:\n- Fix Crash saat memulai Sniffer (ForegroundService Type dataSync)\n- Proteksi Izin Admin: Tombol terkunci otomatis jika belum di-whitelist oleh Admin Bot\n- Fitur Simpan Host .TXT: Simpan domain/SNI tertangkap ke file teks untuk scanning\n- Peningkatan stabilitas DPI Packet Inspector",
+  "release_notes": "Pembaruan X-Finder Pro v2.4.2:\n- Peningkatan performa dan optimasi fitur App Host Sniffer\n- Fitur Ekspor & Simpan Host (.TXT) langsung dari hasil perekaman\n- Tampilan icon aplikasi target lebih jernih dan interaktif\n- Peningkatan stabilitas sistem dan perbaikan bug",
   "mandatory": false
 }
