@@ -34,5 +34,7 @@
       "isBanned": false
     }
   ],
-  "pendingRequests": []
+  "pendingRequests": [],
+  "snifferWhitelistedDevices": [],
+  "masterAllowSniffer": true
 }
