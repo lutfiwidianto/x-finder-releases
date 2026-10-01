@@ -2,6 +2,6 @@
   "latestVersion": "2.1",
   "minRequiredVersion": "1.0",
   "downloadUrl": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.1/x-finder.apk",
-  "releaseNotes": "X-Finder Pro v2.1:\n- Pembaruan UI & Deskripsi Aplikasi\n- Perbaikan Tampilan Kontak Pengembang\n- Sinkronisasi Lisensi Akun Telegram Penuh",
-  "updatedAt": "2026-10-01T09:38:00Z"
+  "releaseNotes": "X-Finder Pro v2.1:\n- Peningkatan performa & stabilitas multi-threaded scanner\n- Optimasi respon scanning Xray (Vless/Vmess) & SSH-WS\n- Sinkronisasi dan verifikasi lisensi perangkat otomatis\n- Tampilan antarmuka (UI) lebih bersih, ringan, dan responsif",
+  "updatedAt": "2026-10-01T09:42:00Z"
 }
