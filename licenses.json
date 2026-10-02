@@ -37,7 +37,8 @@
   "pendingRequests": [],
   "snifferWhitelistedDevices": [
     "2AD0-655B-0EEB-697E",
-    "5101-6508-D817-C034"
+    "5101-6508-D817-C034",
+    "2096-F965-9506-C6B3"
   ],
   "masterAllowSniffer": false,
   "pendingSnifferRequests": []
