@@ -1,7 +1,7 @@
 {
-    "latestVersion":  "2.4.6",
+    "latestVersion":  "2.4.7",
     "mandatory":  false,
-    "versionCode":  11,
-    "downloadUrl":  "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.4.6/xfinder-v2.4.6.apk",
-    "releaseNotes":  "Pembaruan v2.4.6:\n- Penambahan Dual Mode App Host Sniffer (Mode Root \u0026 Mode VPN)\n- Auto-Detect status Root: Sniffing tanpa VPN \u0026 internet tetap 100% lancar\n- Peningkatan kecepatan deteksi SNI \u0026 DNS Query real-time\n- Perbaikan stabilitas background service"
+    "versionCode":  12,
+    "downloadUrl":  "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.4.7/xfinder-v2.4.7.apk",
+    "releaseNotes":  "Pembaruan v2.4.7:\n- Pusat Pembaruan \u0026 Version Hub Modal: Pilih dan pasang versi rilis mana saja langsung di dalam aplikasi\n- Peningkatan Mode Non-Root Sniffer: Transparent DNS Relay aktif (internet 100% lancar tanpa error koneksi)\n- Mode Root Sniffer: Passive kernel sniffing via tcpdump\n- Optimalisasi performa dan rendering UI"
 }
