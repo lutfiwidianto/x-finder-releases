@@ -32,6 +32,13 @@
       "ownerName": "@Arj_mA",
       "expiryDate": "2026-10-31",
       "isBanned": false
+    },
+    {
+      "deviceId": "5101-6508-D817-C034",
+      "ownerName": "@admin",
+      "expiryDate": "2030-12-31",
+      "isBanned": false,
+      "allowSniffer": true
     }
   ],
   "pendingRequests": [],
