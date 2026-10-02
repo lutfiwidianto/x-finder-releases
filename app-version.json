@@ -1,7 +1,7 @@
 {
-    "latestVersion":  "2.4.8",
+    "latestVersion":  "2.4.9",
     "mandatory":  false,
-    "versionCode":  13,
-    "downloadUrl":  "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.4.8/xfinder-v2.4.8.apk",
-    "releaseNotes":  "Pembaruan v2.4.8:\n- Peningkatan Mode Non-Root Sniffer: High-Speed Native DNS Response Engine (Bypass anti-VPN \u0026 login myIM3 lancar normal)\n- Version Hub Modal: Scroll \u0026 pilih versi rilis langsung dalam aplikasi\n- Perbaikan stabilitas transfer paket data real-time"
+    "versionCode":  14,
+    "downloadUrl":  "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.4.9/xfinder-v2.4.9.apk",
+    "releaseNotes":  "Pembaruan v2.4.9:\n- Perbaikan Mode Non-Root (Transparent Split-DNS): Membuka akses internet penuh tanpa terisolasi dari jaringan normal\n- Deteksi \u0026 Penanganan Private DNS: Tombol jalan pintas untuk optimalisasi tangkapan DNS DoT port 853\n- Peningkatan Mode Root: Perbaikan argumen tcpdump \u0026 auto-launch aplikasi target"
 }
