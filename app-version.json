@@ -1,7 +1,7 @@
 {
-  "latest_version": "2.4.4",
-  "version_code": 9,
-  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.4.4/x-finder.apk",
-  "release_notes": "Pembaruan X-Finder Pro v2.4.4:\n- Perbaikan rendering icon aplikasi (Samsung & Android Adaptive Icons) anti force close\n- Peningkatan performa dan optimasi fitur App Host Sniffer\n- Fitur Ekspor & Simpan Host (.TXT) langsung dari hasil perekaman\n- Perbaikan sistem deteksi pembaruan otomatis (in-app updater)\n- Peningkatan stabilitas sistem dan perbaikan bug",
-  "mandatory": false
+    "latestVersion":  "2.4.5",
+    "mandatory":  false,
+    "versionCode":  10,
+    "downloadUrl":  "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.4.5/xfinder-v2.4.5.apk",
+    "releaseNotes":  "Pembaruan v2.4.5:\n- Peningkatan sinkronisasi status lisensi \u0026 izin instan (real-time tanpa delay)\n- Optimalisasi App Host Sniffer DPI Engine \u0026 ekspor domain ke .TXT\n- Perbaikan stabilitas rendering aplikasi pada One UI \u0026 Android 10+"
 }
