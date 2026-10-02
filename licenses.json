@@ -39,5 +39,13 @@
     "2AD0-655B-0EEB-697E"
   ],
   "masterAllowSniffer": false,
-  "pendingSnifferRequests": []
+  "pendingSnifferRequests": [
+    {
+      "deviceId": "5101-6508-D817-C034",
+      "username": "@widianto_lutfi",
+      "telegramId": 1243202492,
+      "name": "\u2e19\uff2c\uff55\ud835\udc95\ud835\udc87\ud835\udc8a \u2301 \ud835\udc7e\ud835\udc8a\ud835\udc85\ud835\udc8a\ud835\udc82\ud835\udc8f\ud835\udc95\ud835\udc90\u2e19",
+      "timestamp": "2026-10-02 01:54:10"
+    }
+  ]
 }
