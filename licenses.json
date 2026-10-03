@@ -61,6 +61,16 @@
       "telegramId": 5617545647,
       "name": "Admin XD",
       "timestamp": "2026-10-02 12:41:04"
+    },
+    {
+      "deviceId": "FF16-F30A-0D2A-8DB7",
+      "username": "@ROGGER",
+      "telegramId": 6915331832,
+      "name": "ROGGER",
+      "timestamp": "2026-10-03 05:44:02"
     }
-  ]
+  ],
+  "snifferUserMap": {
+    "FF16-F30A-0D2A-8DB7": "@ROGGER"
+  }
 }
