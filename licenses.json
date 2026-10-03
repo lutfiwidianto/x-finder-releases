@@ -47,7 +47,15 @@
       "isBanned": false
     }
   ],
-  "pendingRequests": [],
+  "pendingRequests": [
+    {
+      "deviceId": "D17F-FA85-1BB2-B5FF",
+      "username": "@Orgyub",
+      "telegramId": 537392021,
+      "name": "kucing biru \ud83d\ude3c",
+      "timestamp": "2026-10-03 07:28:05"
+    }
+  ],
   "snifferWhitelistedDevices": [
     "2AD0-655B-0EEB-697E",
     "5101-6508-D817-C034",
