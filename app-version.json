@@ -1,7 +1,7 @@
 {
-  "latest_version": "2.5.0",
-  "version_code": 15,
-  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.0/xfinder-v2.5.0.apk",
-  "release_notes": "X-Finder Pro v2.5.0 Pembaruan Resmi:\n- App Host Sniffer Per-App Focus: Ketika mengunci ke satu aplikasi target (misal myIM3 / myXL), daftar host murni hanya menampilkan host dari aplikasi tersebut dan menyaring background apps.\n- Auto-Disable & Button Private DNS: Tombol 1-klik untuk mematikan Private DNS (DoT) serta penanganan otomatis saat sniffing dimulai.\n- Seamless Non-Root Split-DNS Engine: Perbaikan total DNS relay asinkron & dynamic gateway router routes tanpa memutus koneksi internet aplikasi target.\n- Dual Engine Support (Root tcpdump & Non-Root Local VPN).",
+  "latest_version": "2.5.1",
+  "version_code": 16,
+  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.1/xfinder-v2.5.1.apk",
+  "release_notes": "X-Finder Pro v2.5.1 Pembaruan Resmi:\n- Edit Akun SSH WebSocket: Pengeditan akun SSH WebSocket langsung dari modal kelola akun tanpa perlu hapus dan buat ulang.\n- Validasi & Konfirmasi Hapus File: Dialog konfirmasi keamanan sebelum menghapus file .txt target pada Auto All Modes Scanner.\n- Quick cURL Dialog Responsif: Tampilan modal cURL responsif penuh (98% layar) dengan area log fleksibel dan scroll horizontal.\n- Auto-Hunter 23+ Payload Engine: Pindai otomatis puluhan modifikasi payload WebSocket secara paralel.\n- Host to IP & Reverse IP Engine: Resolusi DNS, deteksi CDN, dan penarikan domain dari IP server operator.",
   "mandatory": false
 }
