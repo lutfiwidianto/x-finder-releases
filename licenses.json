@@ -69,16 +69,15 @@
       "ownerName": "@ygprmd",
       "expiryDate": "2026-11-03",
       "isBanned": false
+    },
+    {
+      "deviceId": "BA03-53EB-D9B3-C947",
+      "ownerName": "@TAajadah",
+      "expiryDate": "2026-11-03",
+      "isBanned": false
     }
   ],
   "pendingRequests": [
-    {
-      "deviceId": "BA03-53EB-D9B3-C947",
-      "username": "@TAajadah",
-      "telegramId": 1358962156,
-      "name": "T A",
-      "timestamp": "2026-10-04 06:33:30"
-    },
     {
       "deviceId": "E52D-5E9E-B841-3287",
       "username": "@hachimen",
