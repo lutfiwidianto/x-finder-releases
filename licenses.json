@@ -83,7 +83,15 @@
       "isBanned": false
     }
   ],
-  "pendingRequests": [],
+  "pendingRequests": [
+    {
+      "deviceId": "5498-604E-2D9A-04C9",
+      "username": "@Taxibrons",
+      "telegramId": 428311685,
+      "name": "\ud835\udd3d\ud835\udd56\ud835\udd53\ud835\udd63\ud835\udd5a\ud835\udd52\ud835\udd5f \ud835\udd3b \u2102\ud835\udd59\ud835\udd52\ud835\udd5f\ud835\udd55\ud835\udd63\ud835\udd52",
+      "timestamp": "2026-10-04 20:55:42"
+    }
+  ],
   "snifferWhitelistedDevices": [
     "2AD0-655B-0EEB-697E",
     "5101-6508-D817-C034",
