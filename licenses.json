@@ -85,7 +85,8 @@
   "snifferWhitelistedDevices": [
     "2AD0-655B-0EEB-697E",
     "5101-6508-D817-C034",
-    "2096-F965-9506-C6B3"
+    "2096-F965-9506-C6B3",
+    "FF16-F30A-0D2A-8DB7"
   ],
   "masterAllowSniffer": false,
   "pendingSnifferRequests": [
@@ -95,13 +96,6 @@
       "telegramId": 5617545647,
       "name": "Admin XD",
       "timestamp": "2026-10-02 12:41:04"
-    },
-    {
-      "deviceId": "FF16-F30A-0D2A-8DB7",
-      "username": "@ROGGER",
-      "telegramId": 6915331832,
-      "name": "ROGGER",
-      "timestamp": "2026-10-03 05:44:02"
     }
   ],
   "snifferUserMap": {
