@@ -57,16 +57,15 @@
       "ownerName": "@Budisugiantoro21",
       "expiryDate": "2026-11-03",
       "isBanned": false
+    },
+    {
+      "deviceId": "7706-6B3C-82C5-20B9",
+      "ownerName": "@Zamew12",
+      "expiryDate": "2026-11-03",
+      "isBanned": false
     }
   ],
   "pendingRequests": [
-    {
-      "deviceId": "7706-6B3C-82C5-20B9",
-      "username": "@Zamew12",
-      "telegramId": 5847181299,
-      "name": "Rid",
-      "timestamp": "2026-10-04 00:54:37"
-    },
     {
       "deviceId": "C0DB-4713-CBC1-E242",
       "username": "@ygprmd",
