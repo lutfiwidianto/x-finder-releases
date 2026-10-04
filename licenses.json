@@ -51,6 +51,12 @@
       "ownerName": "@Orgyub",
       "expiryDate": "2026-11-02",
       "isBanned": false
+    },
+    {
+      "deviceId": "C246-456E-CEBC-F99F",
+      "ownerName": "@Budisugiantoro21",
+      "expiryDate": "2026-11-03",
+      "isBanned": false
     }
   ],
   "pendingRequests": [
@@ -67,13 +73,6 @@
       "telegramId": 556832918,
       "name": "Yogi Permadi",
       "timestamp": "2026-10-04 01:57:21"
-    },
-    {
-      "deviceId": "C246-456E-CEBC-F99F",
-      "username": "@Budisugiantoro21",
-      "telegramId": 8195399515,
-      "name": "Budi Phreak_Jateng",
-      "timestamp": "2026-10-04 05:38:57"
     },
     {
       "deviceId": "BA03-53EB-D9B3-C947",
