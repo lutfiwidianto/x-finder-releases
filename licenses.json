@@ -75,17 +75,15 @@
       "ownerName": "@TAajadah",
       "expiryDate": "2026-11-03",
       "isBanned": false
-    }
-  ],
-  "pendingRequests": [
+    },
     {
       "deviceId": "E52D-5E9E-B841-3287",
-      "username": "@hachimen",
-      "telegramId": 1247494799,
-      "name": "Lord Hachiman",
-      "timestamp": "2026-10-04 10:36:52"
+      "ownerName": "@hachimen",
+      "expiryDate": "2026-11-03",
+      "isBanned": false
     }
   ],
+  "pendingRequests": [],
   "snifferWhitelistedDevices": [
     "2AD0-655B-0EEB-697E",
     "5101-6508-D817-C034",
