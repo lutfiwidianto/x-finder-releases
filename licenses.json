@@ -80,6 +80,13 @@
       "telegramId": 1358962156,
       "name": "T A",
       "timestamp": "2026-10-04 06:33:30"
+    },
+    {
+      "deviceId": "E52D-5E9E-B841-3287",
+      "username": "@hachimen",
+      "telegramId": 1247494799,
+      "name": "Lord Hachiman",
+      "timestamp": "2026-10-04 10:36:52"
     }
   ],
   "snifferWhitelistedDevices": [
