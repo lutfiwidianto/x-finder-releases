@@ -53,7 +53,15 @@
       "isBanned": false
     }
   ],
-  "pendingRequests": [],
+  "pendingRequests": [
+    {
+      "deviceId": "7706-6B3C-82C5-20B9",
+      "username": "@Zamew12",
+      "telegramId": 5847181299,
+      "name": "Rid",
+      "timestamp": "2026-10-04 00:54:03"
+    }
+  ],
   "snifferWhitelistedDevices": [
     "2AD0-655B-0EEB-697E",
     "5101-6508-D817-C034",
