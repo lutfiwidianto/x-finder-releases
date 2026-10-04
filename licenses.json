@@ -63,16 +63,15 @@
       "ownerName": "@Zamew12",
       "expiryDate": "2026-11-03",
       "isBanned": false
+    },
+    {
+      "deviceId": "C0DB-4713-CBC1-E242",
+      "ownerName": "@ygprmd",
+      "expiryDate": "2026-11-03",
+      "isBanned": false
     }
   ],
   "pendingRequests": [
-    {
-      "deviceId": "C0DB-4713-CBC1-E242",
-      "username": "@ygprmd",
-      "telegramId": 556832918,
-      "name": "Yogi Permadi",
-      "timestamp": "2026-10-04 01:57:21"
-    },
     {
       "deviceId": "BA03-53EB-D9B3-C947",
       "username": "@TAajadah",
