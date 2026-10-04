@@ -60,6 +60,13 @@
       "telegramId": 5847181299,
       "name": "Rid",
       "timestamp": "2026-10-04 00:54:37"
+    },
+    {
+      "deviceId": "C0DB-4713-CBC1-E242",
+      "username": "@ygprmd",
+      "telegramId": 556832918,
+      "name": "Yogi Permadi",
+      "timestamp": "2026-10-04 01:57:21"
     }
   ],
   "snifferWhitelistedDevices": [
