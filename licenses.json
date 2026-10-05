@@ -1,114 +1,14 @@
 {
-  "masterAllowAll": false,
+  "version": 2,
+  "announcement": "X-Finder Pro Authentication & Licensing is securely powered by Cloudflare Zero-Knowledge Edge Network.",
+  "minAppVersion": "2.5.1",
   "killSwitch": false,
-  "bannedDevices": [],
-  "licenses": [
-    {
-      "deviceId": "0363-8F67-FE6C-BEBE",
-      "ownerName": "@d0oyoulovemee",
-      "expiryDate": "2026-10-31",
-      "isBanned": false
-    },
-    {
-      "deviceId": "1991-2FD3-0A55-5842",
-      "ownerName": "@y0gxx",
-      "expiryDate": "2026-10-31",
-      "isBanned": false
-    },
-    {
-      "deviceId": "2AD0-655B-0EEB-697E",
-      "ownerName": "@widianto_lutfi",
-      "expiryDate": "2026-10-31",
-      "isBanned": false
-    },
-    {
-      "deviceId": "1F85-9C92-6A1A-120B",
-      "ownerName": "@xd_pay",
-      "expiryDate": "2026-10-31",
-      "isBanned": false
-    },
-    {
-      "deviceId": "2096-F965-9506-C6B3",
-      "ownerName": "@Arj_mA",
-      "expiryDate": "2026-10-31",
-      "isBanned": false
-    },
-    {
-      "deviceId": "5101-6508-D817-C034",
-      "ownerName": "@admin",
-      "expiryDate": "2030-12-31",
-      "isBanned": false,
-      "allowSniffer": true
-    },
-    {
-      "deviceId": "FF16-F30A-0D2A-8DB7",
-      "ownerName": "@ROGGER",
-      "expiryDate": "2026-11-02",
-      "isBanned": false
-    },
-    {
-      "deviceId": "D17F-FA85-1BB2-B5FF",
-      "ownerName": "@Orgyub",
-      "expiryDate": "2026-11-02",
-      "isBanned": false
-    },
-    {
-      "deviceId": "C246-456E-CEBC-F99F",
-      "ownerName": "@Budisugiantoro21",
-      "expiryDate": "2026-11-03",
-      "isBanned": false
-    },
-    {
-      "deviceId": "7706-6B3C-82C5-20B9",
-      "ownerName": "@Zamew12",
-      "expiryDate": "2026-11-03",
-      "isBanned": false
-    },
-    {
-      "deviceId": "C0DB-4713-CBC1-E242",
-      "ownerName": "@ygprmd",
-      "expiryDate": "2026-11-03",
-      "isBanned": false
-    },
-    {
-      "deviceId": "BA03-53EB-D9B3-C947",
-      "ownerName": "@TAajadah",
-      "expiryDate": "2026-11-03",
-      "isBanned": false
-    },
-    {
-      "deviceId": "E52D-5E9E-B841-3287",
-      "ownerName": "@hachimen",
-      "expiryDate": "2026-11-03",
-      "isBanned": false
-    }
-  ],
-  "pendingRequests": [
-    {
-      "deviceId": "5498-604E-2D9A-04C9",
-      "username": "@Taxibrons",
-      "telegramId": 428311685,
-      "name": "\ud835\udd3d\ud835\udd56\ud835\udd53\ud835\udd63\ud835\udd5a\ud835\udd52\ud835\udd5f \ud835\udd3b \u2102\ud835\udd59\ud835\udd52\ud835\udd5f\ud835\udd55\ud835\udd63\ud835\udd52",
-      "timestamp": "2026-10-04 20:55:42"
-    }
-  ],
-  "snifferWhitelistedDevices": [
-    "2AD0-655B-0EEB-697E",
-    "5101-6508-D817-C034",
-    "2096-F965-9506-C6B3",
-    "FF16-F30A-0D2A-8DB7"
-  ],
+  "masterAllowAll": false,
   "masterAllowSniffer": false,
-  "pendingSnifferRequests": [
-    {
-      "deviceId": "1F85-9C92-6A1A-120B",
-      "username": "@xd_pay",
-      "telegramId": 5617545647,
-      "name": "Admin XD",
-      "timestamp": "2026-10-02 12:41:04"
-    }
-  ],
-  "snifferUserMap": {
-    "FF16-F30A-0D2A-8DB7": "@ROGGER"
-  }
+  "licenses": [],
+  "bannedDevices": [],
+  "snifferWhitelistedDevices": [],
+  "snifferUserMap": {},
+  "pendingRequests": [],
+  "pendingSnifferRequests": []
 }
