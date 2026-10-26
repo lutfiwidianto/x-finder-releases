@@ -1,7 +1,7 @@
 {
-  "latest_version": "2.5.1",
-  "version_code": 16,
-  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.1/xfinder-v2.5.1.apk",
-  "release_notes": "X-Finder Pro v2.5.1 Suite Update:\n- Interactive Custom Payload Generator: Racik payload HTTP Custom/NetMod/OpenTunnel lengkap (Normal, Split, Direct, Rotate, Request Methods, Front/Back Query, Extra Headers, Tricks).\n- SSL Certificate & SAN Extractor: Ekstrak sertifikat SSL & daftar Subject Alternative Names (SAN) untuk menemukan bug host tersembunyi.\n- Custom Port Range Scanner: Pindai port tunnel, proxy, dan custom range 1-65535 secara multi-threaded.\n- HTTP Header & CDN Fingerprint: Deteksi otomatis provider CDN/WAF (Cloudflare, Akamai, Fastly, AWS) dan Web Server.\n- Reverse IP Multi-Source Engine: Google DoH PTR, AlienVault OTX, HackerTarget, RapidDNS.\n- SSH WebSocket Account Edit & Delete Safety Validation.",
+  "latest_version": "2.5.3",
+  "version_code": 18,
+  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.3/xfinder-v2.5.3.apk",
+  "release_notes": "X-Finder Pro v2.5.3 Update:\n- Fitur Edit & Cek Akun V2Ray/Xray: Dilengkapi tombol edit (pensil), mode edit interaktif untuk cek atau ubah URL config (vless/vmess/trojan), SNI, bug host, dan nama profil.\n- Fitur Salin Hasil Filter: Salin seluruh daftar domain hasil scan yang terhubung (Connected) sekaligus dalam 1 klik tanpa teks sampah.\n- Bagikan Hasil Scan Langsung ke Telegram & WhatsApp via Android Share Sheet.\n- Simpan Daftar Domain Filter ke File Target (.txt) Lokal Otomatis di folder data/.\n- Perapihan antarmuka & perbaikan tombol tambah akun.",
   "mandatory": false
 }
