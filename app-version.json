@@ -1,7 +1,7 @@
 {
-  "latest_version": "2.5.3",
-  "version_code": 18,
-  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.3/xfinder-v2.5.3.apk",
-  "release_notes": "X-Finder Pro v2.5.3 Update:\n- Fitur Edit & Cek Akun V2Ray/Xray: Dilengkapi tombol edit (pensil), mode edit interaktif untuk cek atau ubah URL config (vless/vmess/trojan), SNI, bug host, dan nama profil.\n- Fitur Salin Hasil Filter: Salin seluruh daftar domain hasil scan yang terhubung (Connected) sekaligus dalam 1 klik tanpa teks sampah.\n- Bagikan Hasil Scan Langsung ke Telegram & WhatsApp via Android Share Sheet.\n- Simpan Daftar Domain Filter ke File Target (.txt) Lokal Otomatis di folder data/.\n- Perapihan antarmuka & perbaikan tombol tambah akun.",
+  "latest_version": "2.5.4",
+  "version_code": 19,
+  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.4/xfinder-v2.5.4.apk",
+  "release_notes": "X-Finder Pro v2.5.4 Update:\n- Anti-Tembus Palsu & Validasi Akun Asli: Menambahkan header WebSocket RFC 6455 standar (Sec-WebSocket-Key & Version 13) sehingga bug wildcard asli (seperti support.zoom.us) langsung terdeteksi 101 WS.\n- Filtrasi Ketat: Hanya respon 101 WS & 200 OK murni yang masuk ke status Connected. Status 403 WAF, 404, dan cegatan redirect operator (captive portal/landing page) ditolak tegas dan tidak akan masuk ke list tembus.\n- Chip Khusus 400 Wildcard: Respon 400 Cloudflare Edge dipisahkan ke chip filter tersendiri dan tidak mengotori list Connected.\n- Badge status kartu lebih informatif (TEMBUS, POTENSI 400, DITOLAK 403, GAGAL).",
   "mandatory": false
 }
