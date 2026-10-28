@@ -1,7 +1,7 @@
 {
-  "latest_version": "2.5.6",
-  "version_code": 21,
-  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.6/xfinder-v2.5.6.apk",
-  "release_notes": "X-Finder Pro v2.5.6 Update:\n- Perbaikan Karakter Corrupt/Mojibake: Seluruh preset subnet & menu Clean IP menggunakan label clean anti-corrupt.\n- Pilihan Cepat Domain Bug vs Host Akun: Tombol 'Pakai Akun' cerdas otomatis membedakan domain bug (server address) dan host header akun.\n- 1-Klik Pasang ke Akun Xray Otomatis Salin Link: Begitu IP Clean dipasang, link V2Ray lengkap otomatis disalin ke Clipboard siap dipakai di luXray / v2rayNG.\n- Database Subnet Cloudflare Offline: Tetap bisa memindai IP meski kuota utama 0 MB & pulsa Rp0, pengujian murni menumpang jalur kuota edukasi via data seluler.\n- Panduan Lengkap Diperbarui: Penjelasan mendalam terkait cara pakai kuota edukasi vs Wi-Fi langsung di kartu bantuan.",
+  "latest_version": "2.5.5",
+  "version_code": 20,
+  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.5/xfinder-v2.5.5.apk",
+  "release_notes": "X-Finder Pro v2.5.5 Update:\n- Fitur Baru: Cloudflare Clean IP Scanner & SpeedTest dengan pilihan Akun V2Ray terintegrasi.\n- Alur Mudah Pengguna: Pilih akun V2Ray Anda -> Tekan 'Mulai Scan' -> Dapatkan IP tercepat yang terbukti konek nyata.\n- 1-Klik Pasang ke Akun Xray: IP langsung terpasang dan link V2Ray lengkap otomatis disalin ke Clipboard siap pakai di luXray / v2rayNG.\n- Perbaikan Karakter: Tampilan menu subnet pool bersih dan bebas dari karakter corrupt.\n- Database Subnet Offline: Tetap bisa memindai IP meski kuota utama 0 MB & pulsa Rp0 via jalur data seluler.",
   "mandatory": false
 }
