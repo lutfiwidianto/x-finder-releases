@@ -1,7 +1,7 @@
 {
-  "latest_version": "2.5.4",
-  "version_code": 19,
-  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.4/xfinder-v2.5.4.apk",
-  "release_notes": "X-Finder Pro v2.5.4 Update:\n- Anti-Tembus Palsu & Validasi Akun Asli: Menambahkan header WebSocket RFC 6455 standar (Sec-WebSocket-Key & Version 13) sehingga bug wildcard asli (seperti support.zoom.us) langsung terdeteksi 101 WS.\n- Filtrasi Ketat: Hanya respon 101 WS & 200 OK murni yang masuk ke status Connected. Status 403 WAF, 404, dan cegatan redirect operator (captive portal/landing page) ditolak tegas dan tidak akan masuk ke list tembus.\n- Chip Khusus 400 Wildcard: Respon 400 Cloudflare Edge dipisahkan ke chip filter tersendiri dan tidak mengotori list Connected.\n- Badge status kartu lebih informatif (TEMBUS, POTENSI 400, DITOLAK 403, GAGAL).",
+  "latest_version": "2.5.5",
+  "version_code": 20,
+  "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.5/xfinder-v2.5.5.apk",
+  "release_notes": "X-Finder Pro v2.5.5 Update:\n- Fitur Baru: Cloudflare Clean IP & SpeedTest (Otomatis sampling ribuan IP Anycast Cloudflare dari seluruh subnet resmi 104.x, 172.x, 108.x, 162.x, dll).\n- Real Throughput Download Speedtest: Mengukur kecepatan unduh asli (MB/s & Mbps) langsung dari Cloudflare Edge via paket data / jaringan operator Anda.\n- Indikator Anti-Bengong: Otomatis mendeteksi dan memberi label IP stabil (latensi rendah, throughput kencang, 0% packet loss).\n- 1-Klik Terapkan ke Akun Xray: Pasang IP tercepat langsung ke akun aktif tanpa repot copy-paste manual.\n- Top Pick Preset Clean IP Indonesia: Pilihan daftar IP Cloudflare terbaik yang sudah terbukti tembus di Telkomsel, Indosat, XL, Axis, Tri.",
   "mandatory": false
 }
