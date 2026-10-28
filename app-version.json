@@ -2,6 +2,6 @@
   "latest_version": "2.5.5",
   "version_code": 20,
   "download_url": "https://github.com/lutfiwidianto/x-finder-releases/releases/download/v2.5.5/xfinder-v2.5.5.apk",
-  "release_notes": "X-Finder Pro v2.5.5 Update:\n- Fitur Baru: Cloudflare Clean IP Scanner & SpeedTest dengan pilihan Akun V2Ray terintegrasi.\n- Alur Mudah Pengguna: Pilih akun V2Ray Anda -> Tekan 'Mulai Scan' -> Dapatkan IP tercepat yang terbukti konek nyata.\n- 1-Klik Pasang ke Akun Xray: IP langsung terpasang dan link V2Ray lengkap otomatis disalin ke Clipboard siap pakai di luXray / v2rayNG.\n- Perbaikan Karakter: Tampilan menu subnet pool bersih dan bebas dari karakter corrupt.\n- Database Subnet Offline: Tetap bisa memindai IP meski kuota utama 0 MB & pulsa Rp0 via jalur data seluler.",
+  "release_notes": "X-Finder Pro v2.5.5 Update:\n- Database Lengkap 15 Subnet Resmi Cloudflare (mencakup seluruh blok IPv4 resmi termasuk 104.16.0.0/13 dan 104.17.3.x).\n- Dialog Rincian Subnet: Lihat & salin daftar 15 subnet resmi Cloudflare atau tambah subnet kustom.\n- Pemindaian Super Cepat: Hasil IP konek muncul instan dalam 2-3 detik dengan 30 thread paralel.\n- 1-Klik Salin Semua IP: Salin seluruh IP yang terhubung sekaligus ke Clipboard.\n- Sampel Target Fleksibel: Pilihan sampel 50, 100, 200, 500, hingga 1.500 IP.\n- Tampilan Bersih: Tombol cepat Salin IP per baris untuk mempermudah ekspor.",
   "mandatory": false
 }
