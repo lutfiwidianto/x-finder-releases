@@ -171,15 +171,15 @@
 
     <!-- 2. TAB NAVIGASI PROPORSI PRESISI (Tidak Mepet, Bersih & Lega) -->
     <div class="px-4 mt-3">
-      <div class="grid grid-cols-4 gap-1.5 bg-[#0e1626] p-1.5 rounded-xl border border-white/[0.07]">
+      <div class="grid grid-cols-4 gap-1.5 bg-[#0b1120] p-1.5 rounded-2xl border border-white/[0.08] shadow-inner">
         
         <!-- Tab 1: Antrean -->
         <button 
           @click="switchTab('pending')" 
-          :class="activeTab === 'pending' ? 'bg-indigo-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
-          class="py-2 px-1 rounded-lg transition text-xs text-center flex items-center justify-center space-x-1">
+          :class="activeTab === 'pending' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md shadow-indigo-600/30' : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.03] font-medium'"
+          class="py-2 px-1 rounded-xl transition-all text-[11.5px] text-center flex items-center justify-center space-x-1">
           <span>Antrean</span>
-          <span v-if="db.pendingRequests?.length" class="text-[9.5px] px-1.5 py-0.2 rounded-full font-bold" :class="activeTab === 'pending' ? 'bg-white text-indigo-700' : 'bg-red-500 text-white'">
+          <span v-if="db.pendingRequests?.length" class="text-[9px] px-1.5 py-0.5 rounded-full font-bold leading-none shadow-sm" :class="activeTab === 'pending' ? 'bg-white text-indigo-700' : 'bg-rose-500 text-white'">
             {{ db.pendingRequests.length }}
           </span>
         </button>
@@ -187,10 +187,10 @@
         <!-- Tab 2: Sniffer -->
         <button 
           @click="switchTab('sniffer')" 
-          :class="activeTab === 'sniffer' ? 'bg-indigo-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
-          class="py-2 px-1 rounded-lg transition text-xs text-center flex items-center justify-center space-x-1">
+          :class="activeTab === 'sniffer' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md shadow-indigo-600/30' : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.03] font-medium'"
+          class="py-2 px-1 rounded-xl transition-all text-[11.5px] text-center flex items-center justify-center space-x-1">
           <span>Sniffer</span>
-          <span v-if="db.pendingSnifferRequests?.length" class="text-[9.5px] px-1.5 py-0.2 rounded-full font-bold" :class="activeTab === 'sniffer' ? 'bg-white text-indigo-700' : 'bg-cyan-400 text-slate-900'">
+          <span v-if="db.pendingSnifferRequests?.length" class="text-[9px] px-1.5 py-0.5 rounded-full font-bold leading-none shadow-sm" :class="activeTab === 'sniffer' ? 'bg-white text-indigo-700' : 'bg-cyan-400 text-slate-950'">
             {{ db.pendingSnifferRequests.length }}
           </span>
         </button>
@@ -198,16 +198,16 @@
         <!-- Tab 3: Lisensi -->
         <button 
           @click="switchTab('active')" 
-          :class="activeTab === 'active' ? 'bg-indigo-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
-          class="py-2 px-1 rounded-lg transition text-xs text-center">
+          :class="activeTab === 'active' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md shadow-indigo-600/30' : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.03] font-medium'"
+          class="py-2 px-1 rounded-xl transition-all text-[11.5px] text-center">
           <span>Lisensi</span>
         </button>
 
         <!-- Tab 4: Sistem -->
         <button 
           @click="switchTab('settings')" 
-          :class="activeTab === 'settings' ? 'bg-indigo-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
-          class="py-2 px-1 rounded-lg transition text-xs text-center">
+          :class="activeTab === 'settings' ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md shadow-indigo-600/30' : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.03] font-medium'"
+          class="py-2 px-1 rounded-xl transition-all text-[11.5px] text-center">
           <span>Sistem</span>
         </button>
 
