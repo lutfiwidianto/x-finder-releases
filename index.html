@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>X-Finder Admin Hub - Luxury Edition</title>
+  <title>X-Finder Admin Panel</title>
   
   <!-- Telegram WebApp SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -15,10 +15,10 @@
   <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Inter & JetBrains Mono Fonts -->
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -28,16 +28,6 @@
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              50: '#eef2ff',
-              100: '#e0e7ff',
-              400: '#818cf8',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-            }
           }
         }
       }
@@ -46,8 +36,8 @@
 
   <style>
     body {
-      background-color: #090d16;
-      color: #f1f5f9;
+      background-color: #0b0f19;
+      color: #e2e8f0;
       font-family: 'Plus Jakarta Sans', sans-serif;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
@@ -62,37 +52,33 @@
       border-radius: 4px;
     }
     
-    /* Luxury Cyber-Glass Aesthetics */
-    .glass-panel {
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.35);
+    /* Clean Minimalist Cards */
+    .clean-card {
+      background: #131b2e;
+      border: 1px solid rgba(255, 255, 255, 0.07);
     }
-    .glass-card {
-      background: rgba(18, 26, 45, 0.65);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.3);
-    }
-    .glass-card:hover {
+    .clean-card:hover {
       border-color: rgba(99, 102, 241, 0.25);
     }
-    
-    /* Neon Badges & Indicators */
-    .pulse-dot {
-      animation: neon-pulse 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    .clean-panel {
+      background: rgba(14, 21, 37, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-    @keyframes neon-pulse {
+    
+    /* Pulsing Status Dot */
+    .pulse-dot {
+      animation: pulse-glow 2s infinite;
+    }
+    @keyframes pulse-glow {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 0.35; transform: scale(0.85); }
     }
 
     /* Shimmer Skeleton Loader */
     .shimmer {
-      background: linear-gradient(90deg, rgba(30, 41, 59, 0.4) 0%, rgba(51, 65, 85, 0.6) 50%, rgba(30, 41, 59, 0.4) 100%);
+      background: linear-gradient(90deg, rgba(25, 36, 61, 0.5) 0%, rgba(45, 62, 99, 0.6) 50%, rgba(25, 36, 61, 0.5) 100%);
       background-size: 200% 100%;
       animation: shimmer-anim 1.5s infinite;
     }
@@ -100,69 +86,49 @@
       0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
     }
-
-    /* Smooth transitions */
-    .fade-enter-active, .fade-leave-active {
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-    .fade-enter-from, .fade-leave-to {
-      opacity: 0;
-      transform: translateY(8px);
-    }
   </style>
 </head>
-<body class="min-h-screen bg-[#090d16] text-slate-100 flex flex-col antialiased relative">
+<body class="min-h-screen bg-[#0b0f19] text-slate-100 flex flex-col antialiased">
 
-  <!-- Ambient Luxury Glow Lights -->
-  <div class="fixed -top-24 -left-20 w-80 h-80 bg-indigo-600/20 rounded-full blur-[90px] pointer-events-none"></div>
-  <div class="fixed top-48 -right-20 w-80 h-80 bg-cyan-600/15 rounded-full blur-[90px] pointer-events-none"></div>
-  <div class="fixed -bottom-24 left-1/3 w-96 h-96 bg-violet-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+  <div id="app" class="flex-1 flex flex-col max-w-lg mx-auto w-full pb-20 custom-scrollbar">
 
-  <div id="app" class="flex-1 flex flex-col max-w-xl mx-auto w-full pb-20 custom-scrollbar relative z-10">
-
-    <!-- 1. LUXURY HEADER SECTION -->
-    <header class="sticky top-0 z-30 glass-panel border-b border-white/[0.07] px-4 py-3.5 shadow-2xl">
+    <!-- 1. HEADER SECTION (Bersih, Rapi & Elegan) -->
+    <header class="sticky top-0 z-30 clean-panel px-4 py-3.5 shadow-md">
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-3">
-          <div class="relative">
-            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-cyan-400 p-[1.5px] shadow-lg shadow-indigo-500/25">
-              <div class="w-full h-full bg-slate-900/90 rounded-[14px] flex items-center justify-center">
-                <i class="fa-solid fa-bolt text-lg bg-gradient-to-tr from-indigo-400 to-cyan-300 bg-clip-text text-transparent"></i>
-              </div>
-            </div>
-            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-slate-900 pulse-dot"></span>
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-indigo-500 flex items-center justify-center shadow-sm">
+            <i class="fa-solid fa-bolt text-lg text-white"></i>
           </div>
-
           <div>
             <div class="flex items-center space-x-2">
-              <h1 class="text-base font-extrabold text-white tracking-tight">X-Finder Control</h1>
-              <span class="text-[9.5px] font-bold uppercase tracking-wider bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 border border-indigo-500/30 px-2 py-0.5 rounded-full shadow-inner">VIP ADMIN</span>
+              <h1 class="text-sm font-extrabold text-white tracking-tight">X-Finder Control</h1>
+              <span class="text-[9px] font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2 py-0.5 rounded-full">VIP ADMIN</span>
             </div>
-            <p class="text-[11px] text-slate-400 font-medium">Pusat Otorisasi Lisensi & Keamanan</p>
+            <p class="text-[10.5px] text-slate-400">Pusat Otorisasi Lisensi & Keamanan</p>
           </div>
         </div>
 
         <button 
           @click="fetchData(true)" 
           :disabled="loading" 
-          class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/[0.08] flex items-center justify-center text-slate-300 transition-all active:scale-95 disabled:opacity-50 shadow-sm">
-          <i class="fa-solid fa-arrows-rotate text-sm" :class="{'fa-spin text-indigo-400': loading}"></i>
+          class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 border border-white/[0.08] flex items-center justify-center text-slate-300 transition active:scale-95 disabled:opacity-50">
+          <i class="fa-solid fa-arrows-rotate text-xs" :class="{'fa-spin text-indigo-400': loading}"></i>
         </button>
       </div>
 
-      <!-- Quick Metrics Strip with Glassmorphism -->
-      <div class="grid grid-cols-3 gap-2.5 mt-3.5">
+      <!-- Quick Metrics 3-Col Grid -->
+      <div class="grid grid-cols-3 gap-2 mt-3">
         
         <!-- Metric 1: Pending License -->
         <div 
           @click="switchTab('pending')" 
-          :class="activeTab === 'pending' ? 'ring-2 ring-indigo-500/50 bg-indigo-950/30' : 'bg-slate-800/50 hover:bg-slate-800/80'"
-          class="glass-card rounded-xl p-2.5 text-center cursor-pointer transition-all duration-200 border border-white/[0.06]">
-          <div class="flex items-center justify-center space-x-1 text-[10.5px] text-slate-400 font-medium mb-0.5">
-            <i class="fa-solid fa-inbox text-[10px] text-amber-400"></i>
+          :class="activeTab === 'pending' ? 'border-amber-500/50 bg-amber-500/10' : 'border-white/[0.06] bg-slate-850 hover:bg-slate-800'"
+          class="clean-card rounded-xl p-2.5 text-center cursor-pointer transition border">
+          <div class="text-[10px] text-slate-400 font-medium flex items-center justify-center space-x-1">
+            <i class="fa-solid fa-inbox text-amber-400 text-[9px]"></i>
             <span>Antrean Izin</span>
           </div>
-          <div class="text-base font-extrabold text-amber-400 flex items-center justify-center space-x-1.5">
+          <div class="text-base font-extrabold text-amber-400 flex items-center justify-center space-x-1 mt-0.5">
             <span>{{ db.pendingRequests?.length || 0 }}</span>
             <span v-if="(db.pendingRequests?.length || 0) > 0" class="w-2 h-2 rounded-full bg-amber-400 pulse-dot"></span>
           </div>
@@ -171,13 +137,13 @@
         <!-- Metric 2: Pending Sniffer -->
         <div 
           @click="switchTab('sniffer')" 
-          :class="activeTab === 'sniffer' ? 'ring-2 ring-cyan-500/50 bg-cyan-950/30' : 'bg-slate-800/50 hover:bg-slate-800/80'"
-          class="glass-card rounded-xl p-2.5 text-center cursor-pointer transition-all duration-200 border border-white/[0.06]">
-          <div class="flex items-center justify-center space-x-1 text-[10.5px] text-slate-400 font-medium mb-0.5">
-            <i class="fa-solid fa-satellite-dish text-[10px] text-cyan-400"></i>
+          :class="activeTab === 'sniffer' ? 'border-cyan-500/50 bg-cyan-500/10' : 'border-white/[0.06] bg-slate-850 hover:bg-slate-800'"
+          class="clean-card rounded-xl p-2.5 text-center cursor-pointer transition border">
+          <div class="text-[10px] text-slate-400 font-medium flex items-center justify-center space-x-1">
+            <i class="fa-solid fa-satellite-dish text-cyan-400 text-[9px]"></i>
             <span>Sniffer VIP</span>
           </div>
-          <div class="text-base font-extrabold text-cyan-400 flex items-center justify-center space-x-1.5">
+          <div class="text-base font-extrabold text-cyan-400 flex items-center justify-center space-x-1 mt-0.5">
             <span>{{ db.pendingSnifferRequests?.length || 0 }}</span>
             <span v-if="(db.pendingSnifferRequests?.length || 0) > 0" class="w-2 h-2 rounded-full bg-cyan-400 pulse-dot"></span>
           </div>
@@ -186,13 +152,13 @@
         <!-- Metric 3: Active Licenses -->
         <div 
           @click="switchTab('active')" 
-          :class="activeTab === 'active' ? 'ring-2 ring-emerald-500/50 bg-emerald-950/30' : 'bg-slate-800/50 hover:bg-slate-800/80'"
-          class="glass-card rounded-xl p-2.5 text-center cursor-pointer transition-all duration-200 border border-white/[0.06]">
-          <div class="flex items-center justify-center space-x-1 text-[10.5px] text-slate-400 font-medium mb-0.5">
-            <i class="fa-solid fa-shield-halved text-[10px] text-emerald-400"></i>
+          :class="activeTab === 'active' ? 'border-emerald-500/50 bg-emerald-500/10' : 'border-white/[0.06] bg-slate-850 hover:bg-slate-800'"
+          class="clean-card rounded-xl p-2.5 text-center cursor-pointer transition border">
+          <div class="text-[10px] text-slate-400 font-medium flex items-center justify-center space-x-1">
+            <i class="fa-solid fa-shield-halved text-emerald-400 text-[9px]"></i>
             <span>Aktif KV</span>
           </div>
-          <div class="text-base font-extrabold text-emerald-400">
+          <div class="text-base font-extrabold text-emerald-400 mt-0.5">
             {{ db.licenses?.length || 0 }}
           </div>
         </div>
@@ -200,55 +166,60 @@
       </div>
     </header>
 
-    <!-- 2. LUXURY NAVIGATION TABS -->
+    <!-- 2. TAB NAVIGASI PROPORSI PRESISI (Tidak Mepet, Bersih & Lega) -->
     <div class="px-4 mt-3">
-      <div class="flex bg-slate-900/80 p-1.5 rounded-2xl border border-white/[0.07] text-xs font-semibold shadow-inner">
+      <div class="grid grid-cols-4 gap-1.5 bg-[#0e1626] p-1.5 rounded-xl border border-white/[0.07]">
+        
+        <!-- Tab 1: Antrean -->
         <button 
           @click="switchTab('pending')" 
-          :class="activeTab === 'pending' ? 'bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:text-white'"
-          class="flex-1 py-2.5 rounded-xl transition-all duration-200 text-center flex items-center justify-center space-x-1.5">
-          <i class="fa-solid fa-inbox text-xs"></i>
+          :class="activeTab === 'pending' ? 'bg-indigo-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
+          class="py-2 px-1 rounded-lg transition text-xs text-center flex items-center justify-center space-x-1">
           <span>Antrean</span>
-          <span v-if="db.pendingRequests?.length" class="text-[10px] bg-red-500 text-white font-bold rounded-full px-1.5 py-0.2 shadow">{{ db.pendingRequests.length }}</span>
+          <span v-if="db.pendingRequests?.length" class="text-[9.5px] px-1.5 py-0.2 rounded-full font-bold" :class="activeTab === 'pending' ? 'bg-white text-indigo-700' : 'bg-red-500 text-white'">
+            {{ db.pendingRequests.length }}
+          </span>
         </button>
 
+        <!-- Tab 2: Sniffer -->
         <button 
           @click="switchTab('sniffer')" 
-          :class="activeTab === 'sniffer' ? 'bg-gradient-to-r from-cyan-600 to-cyan-500 text-white shadow-lg shadow-cyan-600/30' : 'text-slate-400 hover:text-white'"
-          class="flex-1 py-2.5 rounded-xl transition-all duration-200 text-center flex items-center justify-center space-x-1.5">
-          <i class="fa-solid fa-satellite-dish text-xs"></i>
+          :class="activeTab === 'sniffer' ? 'bg-indigo-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
+          class="py-2 px-1 rounded-lg transition text-xs text-center flex items-center justify-center space-x-1">
           <span>Sniffer</span>
-          <span v-if="db.pendingSnifferRequests?.length" class="text-[10px] bg-cyan-400 text-slate-950 font-bold rounded-full px-1.5 py-0.2 shadow">{{ db.pendingSnifferRequests.length }}</span>
+          <span v-if="db.pendingSnifferRequests?.length" class="text-[9.5px] px-1.5 py-0.2 rounded-full font-bold" :class="activeTab === 'sniffer' ? 'bg-white text-indigo-700' : 'bg-cyan-400 text-slate-900'">
+            {{ db.pendingSnifferRequests.length }}
+          </span>
         </button>
 
+        <!-- Tab 3: Lisensi -->
         <button 
           @click="switchTab('active')" 
-          :class="activeTab === 'active' ? 'bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:text-white'"
-          class="flex-1 py-2.5 rounded-xl transition-all duration-200 text-center flex items-center justify-center space-x-1.5">
-          <i class="fa-solid fa-shield-halved text-xs"></i>
+          :class="activeTab === 'active' ? 'bg-indigo-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
+          class="py-2 px-1 rounded-lg transition text-xs text-center">
           <span>Lisensi</span>
         </button>
 
+        <!-- Tab 4: Sistem -->
         <button 
           @click="switchTab('settings')" 
-          :class="activeTab === 'settings' ? 'bg-gradient-to-r from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:text-white'"
-          class="flex-1 py-2.5 rounded-xl transition-all duration-200 text-center flex items-center justify-center space-x-1.5">
-          <i class="fa-solid fa-sliders text-xs"></i>
+          :class="activeTab === 'settings' ? 'bg-indigo-600 text-white font-bold shadow' : 'text-slate-400 hover:text-white'"
+          class="py-2 px-1 rounded-lg transition text-xs text-center">
           <span>Sistem</span>
         </button>
+
       </div>
     </div>
 
-    <!-- 3. SEARCH & SMART FILTER BAR -->
+    <!-- 3. SEARCH BAR (Kecuali tab settings) -->
     <div v-if="activeTab !== 'settings'" class="px-4 mt-3 space-y-2">
-      <!-- Search Box -->
       <div class="relative">
         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-500 text-xs"></i>
         <input 
           v-model="searchQuery" 
           type="text" 
           placeholder="Cari Device ID atau @username..." 
-          class="w-full bg-slate-900/90 border border-white/[0.08] rounded-xl pl-9 pr-9 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition shadow-inner">
+          class="w-full bg-[#131b2e] border border-white/[0.08] rounded-xl pl-9 pr-9 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
         <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-3.5 top-3 text-slate-500 hover:text-white text-xs">
           <i class="fa-solid fa-circle-xmark"></i>
         </button>
@@ -266,8 +237,8 @@
           ]" 
           :key="flt.key"
           @click="licenseFilter = flt.key; triggerHaptic('light')"
-          :class="licenseFilter === flt.key ? 'bg-indigo-600 text-white border-indigo-500' : 'bg-slate-800/80 text-slate-400 border-white/[0.06] hover:text-white'"
-          class="px-2.5 py-1 rounded-lg border whitespace-nowrap transition-all duration-150">
+          :class="licenseFilter === flt.key ? 'bg-indigo-600 text-white border-indigo-500' : 'bg-slate-850 text-slate-400 border-white/[0.06] hover:text-white'"
+          class="px-2.5 py-1 rounded-lg border whitespace-nowrap transition">
           {{ flt.label }}
         </button>
       </div>
@@ -278,15 +249,15 @@
 
       <!-- ================== SKELETON SHIMMER LOADER ================== -->
       <div v-if="loading && (!db.licenses || db.licenses.length === 0)" class="space-y-3">
-        <div v-for="i in 3" :key="i" class="glass-card rounded-2xl p-4 space-y-3 border border-white/[0.06]">
+        <div v-for="i in 3" :key="i" class="clean-card rounded-xl p-4 space-y-3 border">
           <div class="flex items-center space-x-3">
             <div class="w-10 h-10 rounded-xl shimmer"></div>
             <div class="flex-1 space-y-2">
-              <div class="w-32 h-3.5 rounded shimmer"></div>
-              <div class="w-48 h-2.5 rounded shimmer"></div>
+              <div class="w-32 h-3 rounded shimmer"></div>
+              <div class="w-48 h-2 rounded shimmer"></div>
             </div>
           </div>
-          <div class="w-full h-12 rounded-xl shimmer"></div>
+          <div class="w-full h-10 rounded-lg shimmer"></div>
         </div>
       </div>
 
@@ -294,76 +265,75 @@
       <section v-if="activeTab === 'pending' && !loading" class="space-y-3">
         
         <!-- Batch Action Banner -->
-        <div v-if="filteredPending.length > 1" class="flex items-center justify-between bg-gradient-to-r from-indigo-950/60 to-purple-950/50 border border-indigo-700/40 rounded-2xl px-3.5 py-3 shadow-lg">
+        <div v-if="filteredPending.length > 1" class="flex items-center justify-between bg-indigo-950/40 border border-indigo-700/40 rounded-xl px-3.5 py-2.5">
           <div class="text-xs text-indigo-200">
             <span class="font-bold text-amber-300">{{ filteredPending.length }}</span> perangkat menunggu izin
           </div>
           <button 
             @click="batchApproveAll" 
             :disabled="actionLoading"
-            class="bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow-md transition-all active:scale-95 disabled:opacity-50 flex items-center space-x-1.5">
+            class="bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg transition active:scale-95 disabled:opacity-50 flex items-center space-x-1.5">
             <i class="fa-solid fa-check-double"></i>
             <span>Setujui Semua (30 Hari)</span>
           </button>
         </div>
 
         <!-- Empty State -->
-        <div v-if="filteredPending.length === 0" class="text-center py-14 glass-card border border-dashed border-slate-700/80 rounded-2xl">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500/20 to-teal-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto text-emerald-400 mb-3 shadow-inner">
-            <i class="fa-solid fa-circle-check text-2xl"></i>
+        <div v-if="filteredPending.length === 0" class="text-center py-14 clean-card border border-dashed border-slate-700 rounded-xl">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto text-emerald-400 mb-2">
+            <i class="fa-solid fa-circle-check text-xl"></i>
           </div>
-          <h3 class="text-sm font-bold text-white">Semua Bersih! Tidak Ada Antrean</h3>
-          <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">Seluruh permintaan izin lisensi telah disetujui atau dibersihkan.</p>
+          <h3 class="text-sm font-bold text-white">Tidak Ada Antrean Menunggu</h3>
+          <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">Semua permintaan izin lisensi telah disetujui atau dibersihkan.</p>
         </div>
 
         <!-- Cards List -->
         <div 
           v-for="(item, idx) in filteredPending" 
           :key="item.deviceId || idx" 
-          class="glass-card rounded-2xl p-4 border border-white/[0.07] shadow-md hover:border-indigo-500/30 transition-all duration-200 space-y-3">
+          class="clean-card rounded-xl p-3.5 border border-white/[0.07] space-y-2.5">
           
+          <!-- Baris 1: Identitas User & Tombol Copy Device -->
           <div class="flex items-start justify-between">
-            <div class="flex items-center space-x-3">
-              <!-- Procedural Colorful Avatar -->
+            <div class="flex items-center space-x-2.5">
               <div 
                 :class="'bg-gradient-to-tr ' + getAvatarGradient(item.username || item.name)" 
-                class="w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm text-white shadow-md">
+                class="w-9 h-9 rounded-xl flex items-center justify-center font-extrabold text-xs text-white shadow">
                 {{ getAvatarInitial(item.username || item.name) }}
               </div>
 
               <div>
-                <div class="flex items-center space-x-2">
+                <div class="flex items-center space-x-1.5">
                   <span class="text-xs font-bold text-white">{{ item.username || '@user_tanpa_id' }}</span>
-                  
-                  <!-- 1-Click Direct Chat Button -->
                   <button 
                     v-if="item.username && item.username.startsWith('@')" 
                     @click="openTelegramChat(item.username)" 
-                    title="Buka Chat Telegram Pribadi" 
-                    class="w-5 h-5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/30 border border-cyan-500/30 text-cyan-400 flex items-center justify-center transition active:scale-95">
-                    <i class="fa-paper-plane text-[9px]"></i>
+                    title="Buka Chat Telegram" 
+                    class="w-5 h-5 rounded-full bg-cyan-500/15 text-cyan-400 flex items-center justify-center hover:bg-cyan-500/30 transition">
+                    <i class="fa-paper-plane text-[8.5px]"></i>
                   </button>
                 </div>
                 
-                <div class="text-[10px] text-slate-400 mt-0.5">
-                  <span v-if="item.name && item.name !== item.username" class="font-medium text-slate-300">{{ item.name }} • </span>
-                  <span>{{ item.timestamp || 'Baru saja' }}</span>
+                <div class="text-[10px] text-slate-400">
+                  <span v-if="item.name && item.name !== item.username" class="text-slate-300 font-medium">{{ item.name }} • </span>
+                  <span>{{ item.timestamp || 'Baru' }}</span>
                 </div>
               </div>
             </div>
 
-            <!-- Monospace Copy Badge -->
+            <!-- Device ID Monospace Badge -->
             <button 
               @click="copyText(item.deviceId)" 
-              class="text-[11px] font-mono text-indigo-400 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/25 px-2.5 py-1 rounded-lg flex items-center space-x-1.5 active:scale-95 transition shadow-sm">
+              class="text-[11px] font-mono text-indigo-400 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/25 px-2 py-0.5 rounded-lg flex items-center space-x-1.5 active:scale-95 transition">
               <span>{{ item.deviceId }}</span>
-              <i class="fa-regular fa-copy text-[10px]"></i>
+              <i class="fa-regular fa-copy text-[9.5px]"></i>
             </button>
           </div>
 
-          <!-- Configuration Row for this Request -->
-          <div class="bg-slate-900/70 rounded-xl p-3 border border-white/[0.05] space-y-2.5 shadow-inner">
-            <!-- Duration Selection Pills -->
+          <!-- Baris 2: Pengaturan Durasi & Kustom Masa Aktif -->
+          <div class="bg-[#0e1626] rounded-xl p-2.5 border border-white/[0.05] space-y-2">
+            
+            <!-- Durasi Chips Termasuk Opsi KUSTOM -->
             <div class="flex items-center justify-between text-[11px]">
               <span class="text-slate-400 font-medium">Masa Aktif:</span>
               <div class="flex space-x-1">
@@ -372,50 +342,70 @@
                     { id: '30', label: '30 Hari' },
                     { id: '90', label: '90 Hari' },
                     { id: '365', label: '1 Thn' },
-                    { id: 'lifetime', label: '∞ Lifetime' }
+                    { id: 'lifetime', label: '∞ Lifetime' },
+                    { id: 'custom', label: '✏️ Kustom' }
                   ]" 
                   :key="dur.id"
-                  @click="getApprovalConfig(item.deviceId).duration = dur.id; triggerHaptic('light')"
-                  :class="getApprovalConfig(item.deviceId).duration === dur.id ? 'bg-indigo-600 text-white font-bold shadow-sm shadow-indigo-600/30' : 'bg-slate-800/80 text-slate-400 hover:text-white'"
-                  class="text-[10px] px-2.5 py-1 rounded-lg transition-all duration-150">
+                  @click="setDurationMode(item.deviceId, dur.id)"
+                  :class="getApprovalConfig(item.deviceId).duration === dur.id ? 'bg-indigo-600 text-white font-bold' : 'bg-slate-800 text-slate-400 hover:text-white'"
+                  class="text-[10px] px-2 py-0.5 rounded-md transition">
                   {{ dur.label }}
                 </button>
               </div>
             </div>
 
+            <!-- FORM INPUT KUSTOM MASA AKTIF (Bisa isi berapa hari saja sesuai mau admin) -->
+            <div v-if="getApprovalConfig(item.deviceId).duration === 'custom'" class="pt-2 border-t border-white/[0.07] space-y-1.5">
+              <div class="flex items-center justify-between text-[11px]">
+                <span class="text-slate-400">Jumlah Hari:</span>
+                <div class="flex items-center space-x-1.5">
+                  <input 
+                    type="number" 
+                    min="1" 
+                    max="3650"
+                    v-model.number="getApprovalConfig(item.deviceId).customDays"
+                    class="w-20 bg-slate-800 border border-indigo-500/60 rounded-md px-2 py-0.5 text-xs text-white text-center font-bold focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                  <span class="text-[11px] text-slate-400">Hari</span>
+                </div>
+              </div>
+              <div class="text-[10px] text-indigo-300 font-mono text-right">
+                📅 Berakhir pada: <strong>{{ calculateCustomDatePreview(getApprovalConfig(item.deviceId).customDays) }}</strong>
+              </div>
+            </div>
+
             <!-- VIP & Sniffer Feature Toggles -->
-            <div class="flex items-center justify-between text-[11px] pt-2 border-t border-white/[0.06]">
-              <label class="flex items-center space-x-2 cursor-pointer">
+            <div class="flex items-center justify-between text-[11px] pt-1.5 border-t border-white/[0.05]">
+              <label class="flex items-center space-x-1.5 cursor-pointer">
                 <input type="checkbox" v-model="getApprovalConfig(item.deviceId).isVip" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0">
-                <span class="text-[10.5px] text-amber-300 font-semibold flex items-center space-x-1">
-                  <i class="fa-solid fa-crown text-[9.5px]"></i>
+                <span class="text-[10px] text-amber-300 font-semibold flex items-center space-x-1">
+                  <i class="fa-solid fa-crown text-[9px]"></i>
                   <span>Status VIP</span>
                 </span>
               </label>
 
-              <label class="flex items-center space-x-2 cursor-pointer">
+              <label class="flex items-center space-x-1.5 cursor-pointer">
                 <input type="checkbox" v-model="getApprovalConfig(item.deviceId).allowSniffer" class="rounded bg-slate-800 border-slate-700 text-cyan-600 focus:ring-0">
-                <span class="text-[10.5px] text-cyan-300 font-semibold flex items-center space-x-1">
-                  <i class="fa-solid fa-satellite-dish text-[9.5px]"></i>
+                <span class="text-[10px] text-cyan-300 font-semibold flex items-center space-x-1">
+                  <i class="fa-solid fa-satellite-dish text-[9px]"></i>
                   <span>Izin Sniffer</span>
                 </span>
               </label>
             </div>
           </div>
 
-          <!-- Action Buttons -->
-          <div class="flex items-center space-x-2.5 pt-0.5">
+          <!-- Baris 3: Tombol Aksi Setujui & Tolak -->
+          <div class="flex items-center space-x-2 pt-0.5">
             <button 
               @click="approveLicense(item)" 
               :disabled="actionLoading"
-              class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold text-xs py-2 rounded-xl shadow-md shadow-emerald-950 transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center space-x-1.5">
+              class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2 rounded-xl transition active:scale-95 disabled:opacity-50 flex items-center justify-center space-x-1.5 shadow">
               <i class="fa-solid fa-check"></i>
               <span>Setujui Izin</span>
             </button>
             <button 
               @click="rejectPending(item.deviceId)" 
               :disabled="actionLoading"
-              class="px-3.5 bg-rose-600/15 hover:bg-rose-600/25 text-rose-400 border border-rose-600/30 font-bold text-xs py-2 rounded-xl transition-all active:scale-95 disabled:opacity-50 flex items-center space-x-1">
+              class="px-3.5 bg-rose-600/15 hover:bg-rose-600/25 text-rose-400 border border-rose-600/30 font-bold text-xs py-2 rounded-xl transition active:scale-95 disabled:opacity-50 flex items-center space-x-1">
               <i class="fa-solid fa-xmark"></i>
               <span>Tolak</span>
             </button>
@@ -426,39 +416,39 @@
 
       <!-- ================== TAB 2: ANTREAN SNIFFER VIP ================== -->
       <section v-if="activeTab === 'sniffer' && !loading" class="space-y-3">
-        <div v-if="filteredSniffer.length === 0" class="text-center py-14 glass-card border border-dashed border-slate-700/80 rounded-2xl">
-          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-500/20 to-blue-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto text-cyan-400 mb-3 shadow-inner">
-            <i class="fa-solid fa-satellite-dish text-2xl"></i>
+        <div v-if="filteredSniffer.length === 0" class="text-center py-14 clean-card border border-dashed border-slate-700 rounded-xl">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mx-auto text-cyan-400 mb-2">
+            <i class="fa-solid fa-satellite-dish text-xl"></i>
           </div>
-          <h3 class="text-sm font-bold text-white">Semua Bersih! Tidak Ada Antrean Sniffer</h3>
+          <h3 class="text-sm font-bold text-white">Tidak Ada Antrean Sniffer</h3>
           <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">Semua permintaan whitelist fitur App Host Sniffer sudah bersih.</p>
         </div>
 
         <div 
           v-for="(item, idx) in filteredSniffer" 
           :key="item.deviceId || idx" 
-          class="glass-card rounded-2xl p-4 border border-white/[0.07] shadow-md space-y-3">
+          class="clean-card rounded-xl p-3.5 border border-white/[0.07] space-y-2.5">
           
           <div class="flex items-start justify-between">
-            <div class="flex items-center space-x-3">
-              <div :class="'bg-gradient-to-tr ' + getAvatarGradient(item.username || item.name)" class="w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-sm text-white shadow-md">
+            <div class="flex items-center space-x-2.5">
+              <div :class="'bg-gradient-to-tr ' + getAvatarGradient(item.username || item.name)" class="w-9 h-9 rounded-xl flex items-center justify-center font-extrabold text-xs text-white shadow">
                 {{ getAvatarInitial(item.username || item.name) }}
               </div>
               <div>
                 <div class="text-xs font-bold text-white flex items-center space-x-1.5">
                   <span>{{ item.username || '@user' }}</span>
-                  <span class="text-[9px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-1.5 py-0.5 rounded font-bold uppercase">Sniffer VIP</span>
-                  <button v-if="item.username && item.username.startsWith('@')" @click="openTelegramChat(item.username)" class="w-5 h-5 rounded-full bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
-                    <i class="fa-paper-plane text-[9px]"></i>
+                  <span class="text-[9px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-1 py-0.2 rounded font-bold uppercase">Sniffer VIP</span>
+                  <button v-if="item.username && item.username.startsWith('@')" @click="openTelegramChat(item.username)" class="w-4 h-4 rounded-full bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
+                    <i class="fa-paper-plane text-[8px]"></i>
                   </button>
                 </div>
-                <div class="text-[10px] text-slate-400 mt-0.5">{{ item.name || 'User' }} • {{ item.timestamp || 'Baru' }}</div>
+                <div class="text-[10px] text-slate-400">{{ item.name || 'User' }} • {{ item.timestamp || 'Baru' }}</div>
               </div>
             </div>
 
-            <button @click="copyText(item.deviceId)" class="text-[11px] font-mono text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-1 rounded-lg flex items-center space-x-1">
+            <button @click="copyText(item.deviceId)" class="text-[11px] font-mono text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-lg flex items-center space-x-1">
               <span>{{ item.deviceId }}</span>
-              <i class="fa-regular fa-copy text-[10px]"></i>
+              <i class="fa-regular fa-copy text-[9.5px]"></i>
             </button>
           </div>
 
@@ -466,14 +456,14 @@
             <button 
               @click="approveSniffer(item.deviceId)" 
               :disabled="actionLoading"
-              class="flex-1 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs py-2 rounded-xl shadow-md transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center space-x-1.5">
+              class="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs py-2 rounded-xl transition active:scale-95 disabled:opacity-50 flex items-center justify-center space-x-1.5 shadow">
               <i class="fa-solid fa-check"></i>
               <span>Izinkan App Host Sniffer</span>
             </button>
             <button 
               @click="rejectSniffer(item.deviceId)" 
               :disabled="actionLoading"
-              class="px-3.5 bg-rose-600/15 hover:bg-rose-600/25 text-rose-400 border border-rose-600/30 font-bold text-xs py-2 rounded-xl transition-all active:scale-95 disabled:opacity-50 flex items-center space-x-1">
+              class="px-3.5 bg-rose-600/15 hover:bg-rose-600/25 text-rose-400 border border-rose-600/30 font-bold text-xs py-2 rounded-xl transition active:scale-95 disabled:opacity-50 flex items-center space-x-1">
               <i class="fa-solid fa-xmark"></i>
               <span>Tolak</span>
             </button>
@@ -491,18 +481,18 @@
         <div 
           v-for="lic in filteredLicenses" 
           :key="lic.deviceId" 
-          class="glass-card rounded-2xl p-3.5 border border-white/[0.07] space-y-2.5 hover:border-slate-600 transition">
+          class="clean-card rounded-xl p-3 border border-white/[0.07] space-y-2 hover:border-slate-600 transition">
           
           <div class="flex items-start justify-between">
             <div class="flex items-center space-x-2.5">
-              <div :class="'bg-gradient-to-tr ' + getAvatarGradient(lic.ownerName)" class="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-xs text-white shadow">
+              <div :class="'bg-gradient-to-tr ' + getAvatarGradient(lic.ownerName)" class="w-8 h-8 rounded-xl flex items-center justify-center font-bold text-xs text-white shadow">
                 {{ getAvatarInitial(lic.ownerName) }}
               </div>
               <div>
                 <div class="text-xs font-bold text-white flex items-center space-x-1.5">
                   <span>{{ lic.ownerName || '@user' }}</span>
-                  <span v-if="lic.isVip" class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1.5 py-0.2 rounded font-bold"><i class="fa-solid fa-crown text-[8px] mr-0.5"></i>VIP</span>
-                  <span v-if="lic.allowSniffer" class="text-[9px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-1.5 py-0.2 rounded font-bold">Sniffer</span>
+                  <span v-if="lic.isVip" class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1 py-0.2 rounded font-bold"><i class="fa-solid fa-crown text-[8px] mr-0.5"></i>VIP</span>
+                  <span v-if="lic.allowSniffer" class="text-[9px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-1 py-0.2 rounded font-bold">Sniffer</span>
                   <button v-if="lic.ownerName && lic.ownerName.startsWith('@')" @click="openTelegramChat(lic.ownerName)" class="w-4 h-4 rounded-full bg-cyan-500/15 text-cyan-400 flex items-center justify-center">
                     <i class="fa-paper-plane text-[8px]"></i>
                   </button>
@@ -514,32 +504,35 @@
               </div>
             </div>
 
-            <!-- Expiry Countdown Pill -->
+            <!-- Expiry Badge -->
             <div class="text-right">
               <div class="text-[9.5px] text-slate-400 font-medium">Masa Aktif:</div>
               <div 
                 :class="getExpiryBadgeClass(lic.expiryDate)" 
-                class="text-[10.5px] font-bold px-2 py-0.5 rounded-md inline-block mt-0.5 border">
+                class="text-[10px] font-bold px-2 py-0.5 rounded inline-block mt-0.5 border">
                 {{ getExpiryStatus(lic.expiryDate).text }}
               </div>
             </div>
           </div>
 
           <!-- Action Strip -->
-          <div class="flex items-center justify-between pt-2.5 border-t border-white/[0.06] text-[11px]">
+          <div class="flex items-center justify-between pt-2 border-t border-white/[0.05] text-[11px]">
             <div class="flex space-x-1.5">
-              <button @click="extendLicense(lic, 30)" class="px-2.5 py-1 bg-slate-800/90 hover:bg-slate-700 border border-white/[0.08] rounded-lg text-[10.5px] text-indigo-300 transition active:scale-95">
-                +30 Hari
+              <button @click="extendLicense(lic, 30)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 border border-white/[0.08] rounded text-[10px] text-indigo-300 transition active:scale-95">
+                +30H
               </button>
-              <button @click="extendLicense(lic, 365)" class="px-2.5 py-1 bg-slate-800/90 hover:bg-slate-700 border border-white/[0.08] rounded-lg text-[10.5px] text-indigo-300 transition active:scale-95">
-                +1 Thn
+              <button @click="extendLicense(lic, 365)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 border border-white/[0.08] rounded text-[10px] text-indigo-300 transition active:scale-95">
+                +1Thn
               </button>
-              <button @click="toggleSnifferForLicense(lic)" class="px-2.5 py-1 border rounded-lg text-[10.5px] transition active:scale-95" :class="lic.allowSniffer ? 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30' : 'bg-slate-800/80 text-slate-400 border-white/[0.08]'">
+              <button @click="promptCustomExtend(lic)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 border border-white/[0.08] rounded text-[10px] text-amber-300 transition active:scale-95">
+                +Kustom
+              </button>
+              <button @click="toggleSnifferForLicense(lic)" class="px-2 py-0.5 border rounded text-[10px] transition active:scale-95" :class="lic.allowSniffer ? 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30' : 'bg-slate-800 text-slate-400 border-white/[0.08]'">
                 {{ lic.allowSniffer ? 'Tutup Sniffer' : 'Buka Sniffer' }}
               </button>
             </div>
 
-            <button @click="deleteLicense(lic.deviceId)" class="text-rose-400 hover:text-rose-300 text-[11px] px-2 py-1 transition active:scale-95">
+            <button @click="deleteLicense(lic.deviceId)" class="text-rose-400 hover:text-rose-300 text-[11px] px-1.5 py-0.5 transition active:scale-95">
               <i class="fa-solid fa-trash-can mr-1"></i>Hapus
             </button>
           </div>
@@ -548,8 +541,8 @@
 
       <!-- ================== TAB 4: KONTROL SISTEM ================== -->
       <section v-if="activeTab === 'settings'" class="space-y-3">
-        <div class="glass-card rounded-2xl p-4 border border-white/[0.07] space-y-4 shadow-lg">
-          <div class="flex items-center space-x-2.5 text-sm font-bold text-white border-b border-white/[0.08] pb-3">
+        <div class="clean-card rounded-xl p-4 border border-white/[0.07] space-y-4">
+          <div class="flex items-center space-x-2 text-sm font-bold text-white border-b border-white/[0.08] pb-2.5">
             <i class="fa-solid fa-shield-halved text-indigo-400"></i>
             <span>Saklar Darurat & Pengaturan Global</span>
           </div>
@@ -565,9 +558,9 @@
             </div>
             <button 
               @click="toggleKillSwitch" 
-              class="w-12 h-6 rounded-full transition-all duration-300 relative flex items-center px-1 shadow-inner"
-              :class="db.killSwitch ? 'bg-rose-600 shadow-rose-900' : 'bg-slate-700'">
-              <div class="w-4 h-4 rounded-full bg-white transition-all transform shadow-md" :class="{'translate-x-6': db.killSwitch}"></div>
+              class="w-12 h-6 rounded-full transition-all duration-200 relative flex items-center px-1"
+              :class="db.killSwitch ? 'bg-rose-600' : 'bg-slate-700'">
+              <div class="w-4 h-4 rounded-full bg-white transition-all transform shadow" :class="{'translate-x-6': db.killSwitch}"></div>
             </button>
           </div>
 
@@ -595,7 +588,7 @@
         </div>
 
         <!-- Info Server & GitHub -->
-        <div class="glass-card rounded-2xl p-3.5 border border-white/[0.06] text-[11px] text-slate-400 space-y-2">
+        <div class="clean-card rounded-xl p-3 border border-white/[0.06] text-[11px] text-slate-400 space-y-2">
           <div class="flex justify-between items-center">
             <span class="flex items-center space-x-1.5">
               <i class="fa-solid fa-cloud text-indigo-400"></i>
@@ -616,12 +609,10 @@
     </main>
 
     <!-- FLOATING TOAST NOTIFICATION -->
-    <transition name="fade">
-      <div v-if="toastMessage" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 glass-panel px-4 py-2.5 rounded-full border border-indigo-500/40 text-xs font-semibold text-white shadow-2xl flex items-center space-x-2.5">
-        <i class="fa-solid fa-circle-check text-emerald-400 text-sm"></i>
-        <span>{{ toastMessage }}</span>
-      </div>
-    </transition>
+    <div v-if="toastMessage" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-slate-900/95 px-4 py-2 rounded-full border border-indigo-500/50 text-xs font-semibold text-white shadow-2xl flex items-center space-x-2">
+      <i class="fa-solid fa-circle-check text-emerald-400"></i>
+      <span>{{ toastMessage }}</span>
+    </div>
 
   </div>
 
@@ -653,7 +644,6 @@
         const toastMessage = ref('');
         const approvalConfigs = ref({});
 
-        // Initialize Telegram WebApp
         onMounted(() => {
           if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.ready();
@@ -718,7 +708,6 @@
             'from-emerald-500 to-teal-700',
             'from-rose-500 to-pink-600',
             'from-amber-500 to-orange-600',
-            'from-fuchsia-500 to-violet-600',
             'from-violet-600 to-indigo-800'
           ];
           if (!str) return gradients[0];
@@ -751,7 +740,7 @@
           const st = getExpiryStatus(expiryDate);
           if (st.isLifetime) return 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30';
           if (st.isExpired) return 'bg-rose-500/15 text-rose-400 border-rose-500/30';
-          if (st.isWarning) return 'bg-amber-500/15 text-amber-300 border-amber-500/30 animate-pulse';
+          if (st.isWarning) return 'bg-amber-500/15 text-amber-300 border-amber-500/30';
           return 'bg-slate-800 text-slate-300 border-white/[0.08]';
         };
 
@@ -759,6 +748,7 @@
           if (!approvalConfigs.value[deviceId]) {
             approvalConfigs.value[deviceId] = {
               duration: '30',
+              customDays: 30,
               isVip: true,
               allowSniffer: false
             };
@@ -766,7 +756,19 @@
           return approvalConfigs.value[deviceId];
         };
 
-        // Fetch Data from Cloudflare Worker
+        const setDurationMode = (deviceId, mode) => {
+          const cfg = getApprovalConfig(deviceId);
+          cfg.duration = mode;
+          triggerHaptic('light');
+        };
+
+        const calculateCustomDatePreview = (days) => {
+          const d = parseInt(days) || 30;
+          const target = new Date();
+          target.setDate(target.getDate() + d);
+          return target.toISOString().split('T')[0];
+        };
+
         const fetchData = async (manual = false) => {
           loading.value = true;
           try {
@@ -794,20 +796,25 @@
           }
         };
 
-        const calculateExpiry = (daysOrLifetime) => {
-          if (daysOrLifetime === 'lifetime') return 'lifetime';
-          const days = parseInt(daysOrLifetime) || 30;
+        const calculateExpiry = (cfg) => {
+          if (cfg.duration === 'lifetime') return 'lifetime';
+          let days = 30;
+          if (cfg.duration === 'custom') {
+            days = parseInt(cfg.customDays) || 30;
+          } else {
+            days = parseInt(cfg.duration) || 30;
+          }
           const target = new Date();
           target.setDate(target.getDate() + days);
           return target.toISOString().split('T')[0];
         };
 
-        // Approve Single License Request
+        // Approve Single License Request (Custom Duration Included)
         const approveLicense = async (item) => {
           actionLoading.value = true;
           triggerHaptic('medium');
           const cfg = getApprovalConfig(item.deviceId);
-          const expiryDate = calculateExpiry(cfg.duration);
+          const expiryDate = calculateExpiry(cfg);
 
           const newLicense = {
             deviceId: item.deviceId,
@@ -849,9 +856,9 @@
               db.value.licenses.unshift(newLicense);
             }
 
-            showToast(`Izin ${item.username || item.deviceId} disetujui!`);
+            showToast(`Izin disetujui s/d ${expiryDate}!`);
           } catch (e) {
-            alert(`Gagal menyetujui: ${e.message}`);
+            alert(`Gagal: ${e.message}`);
           } finally {
             actionLoading.value = false;
           }
@@ -865,10 +872,12 @@
 
           try {
             for (const item of [...db.value.pendingRequests]) {
+              const target = new Date();
+              target.setDate(target.getDate() + 30);
               const newLicense = {
                 deviceId: item.deviceId,
                 ownerName: item.username || '@user',
-                expiryDate: calculateExpiry('30'),
+                expiryDate: target.toISOString().split('T')[0],
                 isVip: true,
                 isBanned: false,
                 allowSniffer: false,
@@ -964,7 +973,7 @@
           }
         };
 
-        // Extend License
+        // Extend License Fixed Days
         const extendLicense = async (lic, days) => {
           actionLoading.value = true;
           try {
@@ -988,6 +997,18 @@
           } finally {
             actionLoading.value = false;
           }
+        };
+
+        // Extend License Custom Days Prompt
+        const promptCustomExtend = async (lic) => {
+          const input = prompt("Masukkan jumlah hari perpanjangan lisensi:", "14");
+          if (!input) return;
+          const days = parseInt(input);
+          if (isNaN(days) || days <= 0) {
+            alert("Jumlah hari tidak valid.");
+            return;
+          }
+          await extendLicense(lic, days);
         };
 
         // Toggle Sniffer for active license
@@ -1068,7 +1089,6 @@
           const q = searchQuery.value.trim().toLowerCase();
           let list = db.value.licenses || [];
 
-          // 1. Search Query Filter
           if (q) {
             list = list.filter(item => 
               (item.deviceId && item.deviceId.toLowerCase().includes(q)) ||
@@ -1076,7 +1096,6 @@
             );
           }
 
-          // 2. Smart Chip Filter
           if (licenseFilter.value === 'VIP') {
             list = list.filter(item => item.isVip);
           } else if (licenseFilter.value === 'SNIFFER') {
@@ -1112,6 +1131,8 @@
           getExpiryStatus,
           getExpiryBadgeClass,
           getApprovalConfig,
+          setDurationMode,
+          calculateCustomDatePreview,
           fetchData,
           approveLicense,
           batchApproveAll,
@@ -1119,6 +1140,7 @@
           approveSniffer,
           rejectSniffer,
           extendLicense,
+          promptCustomExtend,
           toggleSnifferForLicense,
           deleteLicense,
           toggleKillSwitch,
