@@ -268,16 +268,16 @@
       <section v-if="activeTab === 'pending' && !loading" class="space-y-3">
         
         <!-- Batch Action Banner -->
-        <div v-if="filteredPending.length > 1" class="flex items-center justify-between bg-indigo-950/40 border border-indigo-700/40 rounded-xl px-3.5 py-2.5">
+        <div v-if="filteredPending.length > 1" class="flex items-center justify-between bg-gradient-to-r from-indigo-950/60 to-purple-950/50 border border-indigo-700/40 rounded-xl px-3.5 py-2.5 shadow-sm">
           <div class="text-xs text-indigo-200">
             <span class="font-bold text-amber-300">{{ filteredPending.length }}</span> perangkat menunggu izin
           </div>
           <button 
-            @click="batchApproveAll" 
+            @click="openBatchModal" 
             :disabled="actionLoading"
-            class="bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg transition active:scale-95 disabled:opacity-50 flex items-center space-x-1.5">
-            <i class="fa-solid fa-check-double"></i>
-            <span>Setujui Semua (30 Hari)</span>
+            class="bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg transition active:scale-95 disabled:opacity-50 flex items-center space-x-1.5 shadow">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Setujui Semua Serentak...</span>
           </button>
         </div>
 
@@ -611,6 +611,113 @@
 
     </main>
 
+    <!-- MODAL SETUJUI SEMUA SERENTAK (CUSTOM DURASI) -->
+    <div v-if="showBatchModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+      <div class="clean-card bg-[#111827] rounded-2xl max-w-sm w-full p-4 border border-indigo-500/40 space-y-3.5 shadow-2xl">
+        <div class="flex items-center justify-between border-b border-white/[0.08] pb-2.5">
+          <div class="flex items-center space-x-2">
+            <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white text-xs">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3 class="text-xs font-bold text-white">Setujui Serentak (Batch)</h3>
+          </div>
+          <button @click="showBatchModal = false" class="text-slate-400 hover:text-white text-sm">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <p class="text-[11px] text-slate-300 leading-relaxed">
+          Setujui sekaligus <strong class="text-amber-400 font-bold">{{ filteredPending.length }} perangkat</strong> dalam antrean. Tentukan masa aktif serentak yang Anda inginkan:
+        </p>
+
+        <!-- Duration Options -->
+        <div class="space-y-1.5">
+          <label class="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Pilih Masa Aktif:</label>
+          <div class="grid grid-cols-3 gap-1.5">
+            <button 
+              v-for="dur in [
+                { id: '7', label: '7 Hari' },
+                { id: '14', label: '14 Hari' },
+                { id: '30', label: '30 Hari' },
+                { id: '90', label: '90 Hari' },
+                { id: '365', label: '1 Tahun' },
+                { id: 'lifetime', label: '∞ Lifetime' }
+              ]" 
+              :key="dur.id"
+              @click="batchDuration = dur.id"
+              :class="batchDuration === dur.id ? 'bg-indigo-600 text-white font-bold border-indigo-500' : 'bg-slate-800 text-slate-300 border-white/[0.06]'"
+              class="py-1.5 px-2 rounded-lg text-[10.5px] border transition text-center">
+              {{ dur.label }}
+            </button>
+          </div>
+
+          <!-- Custom Days Option Button -->
+          <button 
+            @click="batchDuration = 'custom'" 
+            :class="batchDuration === 'custom' ? 'bg-indigo-600 text-white font-bold border-indigo-500' : 'bg-slate-800 text-slate-300 border-white/[0.06]'"
+            class="w-full py-1.5 px-2 rounded-lg text-[10.5px] border transition text-center flex items-center justify-center space-x-1.5 mt-1">
+            <i class="fa-solid fa-pen text-[9px]"></i>
+            <span>Kustom Jumlah Hari Bebas</span>
+          </button>
+
+          <!-- Input Angka Hari Kustom -->
+          <div v-if="batchDuration === 'custom'" class="bg-slate-900/90 p-2.5 rounded-xl border border-indigo-500/40 space-y-1.5 mt-1">
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-300 font-medium text-[11px]">Berapa Hari?</span>
+              <div class="flex items-center space-x-1.5">
+                <input 
+                  type="number" 
+                  min="1" 
+                  max="3650"
+                  v-model.number="batchCustomDays" 
+                  placeholder="30"
+                  class="w-20 bg-slate-800 border border-indigo-500 rounded-md px-2 py-1 text-xs text-white text-center font-bold focus:outline-none">
+                <span class="text-xs text-slate-400">Hari</span>
+              </div>
+            </div>
+            <div class="text-[10px] text-indigo-300 font-mono text-right">
+              📅 Berakhir pada: <strong>{{ calculateCustomDatePreview(batchCustomDays) }}</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toggles: VIP & Sniffer -->
+        <div class="bg-slate-900/60 p-2.5 rounded-xl border border-white/[0.05] space-y-2">
+          <label class="flex items-center justify-between text-[11px] cursor-pointer">
+            <span class="text-slate-300 flex items-center space-x-1.5">
+              <i class="fa-solid fa-crown text-amber-400 text-[10px]"></i>
+              <span>Berikan Status VIP ke Semua</span>
+            </span>
+            <input type="checkbox" v-model="batchIsVip" class="rounded bg-slate-800 border-slate-700 text-indigo-600">
+          </label>
+
+          <label class="flex items-center justify-between text-[11px] cursor-pointer pt-1.5 border-t border-white/[0.05]">
+            <span class="text-slate-300 flex items-center space-x-1.5">
+              <i class="fa-solid fa-satellite-dish text-cyan-400 text-[10px]"></i>
+              <span>Izinkan Fitur App Sniffer ke Semua</span>
+            </span>
+            <input type="checkbox" v-model="batchAllowSniffer" class="rounded bg-slate-800 border-slate-700 text-cyan-600">
+          </label>
+        </div>
+
+        <!-- Modal Action Buttons -->
+        <div class="flex space-x-2 pt-1">
+          <button 
+            @click="showBatchModal = false"
+            class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-2 rounded-xl transition">
+            Batal
+          </button>
+          <button 
+            @click="executeBatchApprove" 
+            :disabled="actionLoading"
+            class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2 rounded-xl transition shadow flex items-center justify-center space-x-1.5 disabled:opacity-50">
+            <i class="fa-solid fa-check" :class="{'fa-spin': actionLoading}"></i>
+            <span>Setujui Serentak</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- FLOATING TOAST NOTIFICATION -->
     <div v-if="toastMessage" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-slate-900/95 px-4 py-2 rounded-full border border-indigo-500/50 text-xs font-semibold text-white shadow-2xl flex items-center space-x-2">
       <i class="fa-solid fa-circle-check text-emerald-400"></i>
@@ -646,6 +753,13 @@
         const actionLoading = ref(false);
         const toastMessage = ref('');
         const approvalConfigs = ref({});
+
+        // Batch Modal State
+        const showBatchModal = ref(false);
+        const batchDuration = ref('30');
+        const batchCustomDays = ref(30);
+        const batchIsVip = ref(true);
+        const batchAllowSniffer = ref(false);
 
         onMounted(() => {
           if (window.Telegram && window.Telegram.WebApp) {
@@ -859,6 +973,11 @@
               db.value.licenses.unshift(newLicense);
             }
 
+            // Notifikasi instan ke Telegram pengguna
+            if (item.telegramId) {
+              sendTelegramNotification(item.telegramId, item.deviceId, expiryDate, cfg.isVip, cfg.allowSniffer);
+            }
+
             showToast(`Izin disetujui s/d ${expiryDate}!`);
           } catch (e) {
             alert(`Gagal: ${e.message}`);
@@ -867,24 +986,69 @@
           }
         };
 
-        // Batch Approve All
-        const batchApproveAll = async () => {
-          if (!confirm(`Setujui seluruh ${db.value.pendingRequests.length} antrean lisensi sekaligus selama 30 Hari?`)) return;
+        // Kirim Notifikasi Telegram Langsung ke Pengguna
+        const sendTelegramNotification = async (telegramId, deviceId, expiryDate, isVip, isSniffer) => {
+          if (!telegramId) return;
+          try {
+            const BOT_TOKEN = "8159062177:AAHxcSdk1AOKgyOSlizij_iqWnE0IzmdI78";
+            const expText = expiryDate === 'lifetime' ? 'Permanen (Lifetime)' : expiryDate;
+            const msg = `🎉 *LISENSI X-FINDER PRO DISETUJUI!*\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+              `📱 *Device ID:* \`${deviceId}\`\n` +
+              `⏳ *Masa Aktif:* s/d *${expText}*\n` +
+              `⭐ *Status:* ${isVip ? 'VIP Aktif' : 'Standar'}\n` +
+              `${isSniffer ? '🛰️ *Akses Sniffer:* Aktif\n' : ''}\n` +
+              `Permintaan lisensi Anda telah disetujui oleh Admin.\n` +
+              `Silakan buka aplikasi **X-Finder** dan klik tombol **Cek Status** untuk menikmati seluruh fitur premium!`;
+
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                chat_id: telegramId,
+                text: msg,
+                parse_mode: 'Markdown'
+              })
+            });
+          } catch (e) {
+            console.warn("Telegram notification error:", e);
+          }
+        };
+
+        // Buka Modal Setujui Serentak
+        const openBatchModal = () => {
+          showBatchModal.value = true;
+          triggerHaptic('light');
+        };
+
+        // Eksekusi Setujui Semua Serentak (Durasi Kustom Didukung)
+        const executeBatchApprove = async () => {
+          if (filteredPending.value.length === 0) return;
           actionLoading.value = true;
           triggerHaptic('heavy');
 
+          let expiryDate = 'lifetime';
+          if (batchDuration.value === 'custom') {
+            const days = parseInt(batchCustomDays.value) || 30;
+            const target = new Date();
+            target.setDate(target.getDate() + days);
+            expiryDate = target.toISOString().split('T')[0];
+          } else if (batchDuration.value !== 'lifetime') {
+            const days = parseInt(batchDuration.value) || 30;
+            const target = new Date();
+            target.setDate(target.getDate() + days);
+            expiryDate = target.toISOString().split('T')[0];
+          }
+
           try {
-            for (const item of [...db.value.pendingRequests]) {
-              const target = new Date();
-              target.setDate(target.getDate() + 30);
+            for (const item of [...filteredPending.value]) {
               const newLicense = {
                 deviceId: item.deviceId,
                 ownerName: item.username || '@user',
-                expiryDate: target.toISOString().split('T')[0],
-                isVip: true,
+                expiryDate: expiryDate,
+                isVip: batchIsVip.value,
                 isBanned: false,
-                allowSniffer: false,
-                note: 'Batch approved via WebApp'
+                allowSniffer: batchAllowSniffer.value,
+                note: `Batch approved (${expiryDate})`
               };
 
               await fetch(`${CF_WORKER_URL}/admin/license`, {
@@ -893,17 +1057,34 @@
                 body: JSON.stringify(newLicense)
               });
 
+              if (batchAllowSniffer.value) {
+                await fetch(`${CF_WORKER_URL}/admin/sniffer`, {
+                  method: 'POST',
+                  headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ deviceId: item.deviceId, enabled: true })
+                });
+              }
+
+              // Kirim notifikasi Telegram ke masing-masing pengguna
+              if (item.telegramId) {
+                sendTelegramNotification(item.telegramId, item.deviceId, expiryDate, batchIsVip.value, batchAllowSniffer.value);
+              }
+
               db.value.licenses.unshift(newLicense);
             }
+
+            const approvedDeviceIds = new Set(filteredPending.value.map(p => p.deviceId));
+            const remainingPending = db.value.pendingRequests.filter(p => !approvedDeviceIds.has(p.deviceId));
 
             await fetch(`${CF_WORKER_URL}/admin/pending`, {
               method: 'POST',
               headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
-              body: JSON.stringify({ pendingRequests: [] })
+              body: JSON.stringify({ pendingRequests: remainingPending })
             });
 
-            db.value.pendingRequests = [];
-            showToast("Seluruh antrean berhasil disetujui!");
+            db.value.pendingRequests = remainingPending;
+            showBatchModal.value = false;
+            showToast(`Sukses! ${approvedDeviceIds.size} antrean disetujui serentak s/d ${expiryDate}!`);
           } catch (e) {
             alert(`Error: ${e.message}`);
           } finally {
@@ -1138,7 +1319,13 @@
           calculateCustomDatePreview,
           fetchData,
           approveLicense,
-          batchApproveAll,
+          showBatchModal,
+          batchDuration,
+          batchCustomDays,
+          batchIsVip,
+          batchAllowSniffer,
+          openBatchModal,
+          executeBatchApprove,
           rejectPending,
           approveSniffer,
           rejectSniffer,
