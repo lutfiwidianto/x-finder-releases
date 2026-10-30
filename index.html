@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>X-Finder Admin Control Center</title>
+  
+  <!-- Telegram WebApp SDK -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  
+  <!-- Vue 3 & Tailwind CSS via CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inter Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            sneat: {
+              bg: '#0f172a',
+              card: '#1e293b',
+              border: '#334155',
+              primary: '#6366f1',
+              primaryHover: '#4f46e5',
+              success: '#10b981',
+              warning: '#f59e0b',
+              danger: '#ef4444',
+              info: '#06b6d4',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #0f172a;
+      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(51, 65, 85, 0.7);
+    }
+    .badge-pulse {
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+      animation: pulse 1.6s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(239, 68, 68, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-900 text-slate-100 flex flex-col antialiased">
+
+  <div id="app" class="flex-1 flex flex-col max-w-xl mx-auto w-full pb-20 custom-scrollbar">
+
+    <!-- 1. HEADER SECTION -->
+    <header class="sticky top-0 z-30 glass-card border-b border-slate-700/80 px-4 py-3 shadow-lg">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-indigo-500/30 shadow-md">
+            <i class="fa-solid fa-bolt text-lg text-white"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h1 class="text-base font-bold text-white tracking-tight">X-Finder Hub</h1>
+              <span class="text-[10px] font-semibold uppercase tracking-wider bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-1.5 py-0.5 rounded">Admin VIP</span>
+            </div>
+            <p class="text-[11px] text-slate-400">Pusat Lisensi & Otorisasi Perangkat</p>
+          </div>
+        </div>
+
+        <button @click="fetchData(true)" :disabled="loading" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 flex items-center justify-center text-slate-300 transition active:scale-95 disabled:opacity-50">
+          <i class="fa-solid fa-arrows-rotate text-sm" :class="{'fa-spin text-indigo-400': loading}"></i>
+        </button>
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div class="grid grid-cols-3 gap-2 mt-3">
+        <div @click="activeTab = 'pending'" class="bg-slate-800/80 border border-slate-700/70 rounded-lg p-2 text-center cursor-pointer hover:border-indigo-500/50 transition">
+          <div class="text-[10px] text-slate-400 font-medium">Antrean Lisensi</div>
+          <div class="text-base font-extrabold text-amber-400 flex items-center justify-center space-x-1">
+            <span>{{ db.pendingRequests?.length || 0 }}</span>
+            <span v-if="(db.pendingRequests?.length || 0) > 0" class="w-2 h-2 rounded-full bg-amber-400 badge-pulse"></span>
+          </div>
+        </div>
+        <div @click="activeTab = 'sniffer'" class="bg-slate-800/80 border border-slate-700/70 rounded-lg p-2 text-center cursor-pointer hover:border-indigo-500/50 transition">
+          <div class="text-[10px] text-slate-400 font-medium">Antrean Sniffer</div>
+          <div class="text-base font-extrabold text-cyan-400 flex items-center justify-center space-x-1">
+            <span>{{ db.pendingSnifferRequests?.length || 0 }}</span>
+            <span v-if="(db.pendingSnifferRequests?.length || 0) > 0" class="w-2 h-2 rounded-full bg-cyan-400 badge-pulse"></span>
+          </div>
+        </div>
+        <div @click="activeTab = 'active'" class="bg-slate-800/80 border border-slate-700/70 rounded-lg p-2 text-center cursor-pointer hover:border-indigo-500/50 transition">
+          <div class="text-[10px] text-slate-400 font-medium">Lisensi Aktif</div>
+          <div class="text-base font-extrabold text-emerald-400">
+            {{ db.licenses?.length || 0 }}
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. NAVIGATION TABS -->
+    <div class="px-4 mt-3">
+      <div class="flex bg-slate-800/90 p-1 rounded-xl border border-slate-700/80 text-xs font-semibold">
+        <button 
+          @click="activeTab = 'pending'" 
+          :class="activeTab === 'pending' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-white'"
+          class="flex-1 py-2 rounded-lg transition text-center flex items-center justify-center space-x-1.5">
+          <i class="fa-solid fa-inbox text-xs"></i>
+          <span>Antrean</span>
+          <span v-if="db.pendingRequests?.length" class="text-[10px] bg-red-500 text-white rounded-full px-1.5 py-0.2">{{ db.pendingRequests.length }}</span>
+        </button>
+
+        <button 
+          @click="activeTab = 'sniffer'" 
+          :class="activeTab === 'sniffer' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-white'"
+          class="flex-1 py-2 rounded-lg transition text-center flex items-center justify-center space-x-1.5">
+          <i class="fa-solid fa-satellite-dish text-xs"></i>
+          <span>Sniffer</span>
+          <span v-if="db.pendingSnifferRequests?.length" class="text-[10px] bg-cyan-500 text-white rounded-full px-1.5 py-0.2">{{ db.pendingSnifferRequests.length }}</span>
+        </button>
+
+        <button 
+          @click="activeTab = 'active'" 
+          :class="activeTab === 'active' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-white'"
+          class="flex-1 py-2 rounded-lg transition text-center flex items-center justify-center space-x-1.5">
+          <i class="fa-solid fa-shield-halved text-xs"></i>
+          <span>Aktif</span>
+        </button>
+
+        <button 
+          @click="activeTab = 'settings'" 
+          :class="activeTab === 'settings' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-white'"
+          class="flex-1 py-2 rounded-lg transition text-center flex items-center justify-center space-x-1.5">
+          <i class="fa-solid fa-sliders text-xs"></i>
+          <span>Kontrol</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. SEARCH BAR (Kecuali tab settings) -->
+    <div v-if="activeTab !== 'settings'" class="px-4 mt-3">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-500 text-xs"></i>
+        <input 
+          v-model="searchQuery" 
+          type="text" 
+          placeholder="Cari Device ID atau @username..." 
+          class="w-full bg-slate-800/90 border border-slate-700 rounded-xl pl-9 pr-9 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition">
+        <button v-if="searchQuery" @click="searchQuery = ''" class="absolute right-3 top-2.5 text-slate-500 hover:text-white text-xs">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- 4. TAB CONTENTS -->
+    <main class="flex-1 px-4 mt-3 space-y-3">
+
+      <!-- ================== TAB 1: ANTREAN LISENSI ================== -->
+      <section v-if="activeTab === 'pending'" class="space-y-3">
+        
+        <!-- Batch Action Bar -->
+        <div v-if="filteredPending.length > 1" class="flex items-center justify-between bg-indigo-950/40 border border-indigo-800/40 rounded-xl px-3 py-2.5">
+          <div class="text-xs text-indigo-300">
+            <span class="font-bold">{{ filteredPending.length }}</span> perangkat menunggu izin
+          </div>
+          <button 
+            @click="batchApproveAll" 
+            :disabled="actionLoading"
+            class="bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg shadow-sm transition active:scale-95 disabled:opacity-50 flex items-center space-x-1.5">
+            <i class="fa-solid fa-check-double"></i>
+            <span>Setujui Semua (30 Hari)</span>
+          </button>
+        </div>
+
+        <!-- Empty State -->
+        <div v-if="filteredPending.length === 0" class="text-center py-12 bg-slate-800/40 border border-dashed border-slate-700/80 rounded-2xl">
+          <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-emerald-400 mb-2">
+            <i class="fa-solid fa-circle-check text-xl"></i>
+          </div>
+          <h3 class="text-sm font-semibold text-white">Tidak Ada Antrean Menunggu</h3>
+          <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">Seluruh permintaan izin lisensi telah disetujui atau dibersihkan.</p>
+        </div>
+
+        <!-- Cards List -->
+        <div 
+          v-for="(item, idx) in filteredPending" 
+          :key="item.deviceId || idx" 
+          class="glass-card rounded-xl p-3.5 border border-slate-700/80 shadow-sm hover:border-slate-600 transition space-y-2.5">
+          
+          <div class="flex items-start justify-between">
+            <div class="flex items-center space-x-2.5">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-slate-700 to-slate-600 flex items-center justify-center font-bold text-xs text-white">
+                {{ (item.username || 'U')[1]?.toUpperCase() || 'U' }}
+              </div>
+              <div>
+                <div class="text-xs font-bold text-white flex items-center space-x-1.5">
+                  <span>{{ item.username || '@user_tanpa_id' }}</span>
+                  <span v-if="item.name && item.name !== item.username" class="text-[10px] text-slate-400 font-normal">({{ item.name }})</span>
+                </div>
+                <div class="text-[10px] text-slate-400">{{ item.timestamp || 'Baru saja' }}</div>
+              </div>
+            </div>
+
+            <button 
+              @click="copyText(item.deviceId)" 
+              class="text-[11px] font-mono text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 rounded flex items-center space-x-1 active:scale-95 transition">
+              <span>{{ item.deviceId }}</span>
+              <i class="fa-regular fa-copy text-[10px]"></i>
+            </button>
+          </div>
+
+          <!-- Configuration Row for this Request -->
+          <div class="bg-slate-900/60 rounded-lg p-2 border border-slate-800 space-y-1.5">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-slate-400">Durasi:</span>
+              <div class="flex space-x-1">
+                <button 
+                  v-for="dur in ['30', '90', '365', 'lifetime']" 
+                  :key="dur"
+                  @click="getApprovalConfig(item.deviceId).duration = dur"
+                  :class="getApprovalConfig(item.deviceId).duration === dur ? 'bg-indigo-600 text-white font-bold' : 'bg-slate-800 text-slate-400 hover:text-white'"
+                  class="text-[10px] px-2 py-0.5 rounded transition">
+                  {{ dur === 'lifetime' ? '∞ Selamanya' : dur + ' H' }}
+                </button>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-[11px] pt-1 border-t border-slate-800/80">
+              <label class="flex items-center space-x-1.5 cursor-pointer">
+                <input type="checkbox" v-model="getApprovalConfig(item.deviceId).isVip" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0">
+                <span class="text-[10px] text-amber-300 font-semibold"><i class="fa-solid fa-crown text-[9px] mr-0.5"></i>Status VIP</span>
+              </label>
+
+              <label class="flex items-center space-x-1.5 cursor-pointer">
+                <input type="checkbox" v-model="getApprovalConfig(item.deviceId).allowSniffer" class="rounded bg-slate-800 border-slate-700 text-cyan-600 focus:ring-0">
+                <span class="text-[10px] text-cyan-300 font-semibold"><i class="fa-solid fa-satellite-dish text-[9px] mr-0.5"></i>Izin Sniffer</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center space-x-2 pt-0.5">
+            <button 
+              @click="approveLicense(item)" 
+              :disabled="actionLoading"
+              class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs py-1.5 rounded-lg shadow-sm transition active:scale-95 disabled:opacity-50 flex items-center justify-center space-x-1">
+              <i class="fa-solid fa-check"></i>
+              <span>Setujui Izin</span>
+            </button>
+            <button 
+              @click="rejectPending(item.deviceId)" 
+              :disabled="actionLoading"
+              class="px-3 bg-rose-600/20 hover:bg-rose-600/30 text-rose-400 border border-rose-600/30 font-semibold text-xs py-1.5 rounded-lg transition active:scale-95 disabled:opacity-50">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================== TAB 2: ANTREAN SNIFFER VIP ================== -->
+      <section v-if="activeTab === 'sniffer'" class="space-y-3">
+        <div v-if="filteredSniffer.length === 0" class="text-center py-12 bg-slate-800/40 border border-dashed border-slate-700/80 rounded-2xl">
+          <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-cyan-400 mb-2">
+            <i class="fa-solid fa-satellite-dish text-xl"></i>
+          </div>
+          <h3 class="text-sm font-semibold text-white">Tidak Ada Antrean Sniffer</h3>
+          <p class="text-xs text-slate-400 mt-1 max-w-xs mx-auto">Semua permintaan whitelist fitur App Host Sniffer sudah bersih.</p>
+        </div>
+
+        <div 
+          v-for="(item, idx) in filteredSniffer" 
+          :key="item.deviceId || idx" 
+          class="glass-card rounded-xl p-3.5 border border-slate-700/80 shadow-sm space-y-2.5">
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-xs font-bold text-white flex items-center space-x-1.5">
+                <span>{{ item.username || '@user' }}</span>
+                <span class="text-[9px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-1 py-0.2 rounded font-semibold">VIP Request</span>
+              </div>
+              <div class="text-[10px] text-slate-400">{{ item.name || 'User' }} • {{ item.timestamp || 'Baru' }}</div>
+            </div>
+            <button @click="copyText(item.deviceId)" class="text-[11px] font-mono text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded flex items-center space-x-1">
+              <span>{{ item.deviceId }}</span>
+              <i class="fa-regular fa-copy text-[10px]"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <button 
+              @click="approveSniffer(item.deviceId)" 
+              :disabled="actionLoading"
+              class="flex-1 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-xs py-1.5 rounded-lg shadow-sm transition active:scale-95 disabled:opacity-50 flex items-center justify-center space-x-1">
+              <i class="fa-solid fa-check"></i>
+              <span>Izinkan App Sniffer</span>
+            </button>
+            <button 
+              @click="rejectSniffer(item.deviceId)" 
+              :disabled="actionLoading"
+              class="px-3 bg-rose-600/20 hover:bg-rose-600/30 text-rose-400 border border-rose-600/30 font-semibold text-xs py-1.5 rounded-lg transition active:scale-95 disabled:opacity-50">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================== TAB 3: LISENSI AKTIF ================== -->
+      <section v-if="activeTab === 'active'" class="space-y-2.5">
+        <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+          <span>Menampilkan {{ filteredLicenses.length }} perangkat aktif</span>
+          <span class="font-mono text-[10px] text-indigo-400">Database Cloudflare KV</span>
+        </div>
+
+        <div 
+          v-for="lic in filteredLicenses" 
+          :key="lic.deviceId" 
+          class="glass-card rounded-xl p-3 border border-slate-700/80 space-y-2">
+          
+          <div class="flex items-start justify-between">
+            <div>
+              <div class="text-xs font-bold text-white flex items-center space-x-1.5">
+                <span>{{ lic.ownerName || '@user' }}</span>
+                <span v-if="lic.isVip" class="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1 py-0.2 rounded font-semibold"><i class="fa-solid fa-crown text-[8px] mr-0.5"></i>VIP</span>
+                <span v-if="lic.allowSniffer" class="text-[9px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 px-1 py-0.2 rounded font-semibold">Sniffer</span>
+              </div>
+              <div class="font-mono text-[11px] text-slate-300 mt-0.5">{{ lic.deviceId }}</div>
+            </div>
+
+            <div class="text-right">
+              <div class="text-[10px] text-slate-400 font-medium">Masa Aktif:</div>
+              <div class="text-[11px] font-bold" :class="lic.expiryDate === 'lifetime' ? 'text-emerald-400' : 'text-slate-200'">
+                {{ lic.expiryDate === 'lifetime' ? '∞ Lifetime' : lic.expiryDate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-slate-800/80 text-[11px]">
+            <div class="flex space-x-1.5">
+              <button @click="extendLicense(lic, 30)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded text-[10px] text-indigo-300 transition">
+                +30 Hari
+              </button>
+              <button @click="extendLicense(lic, 365)" class="px-2 py-0.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded text-[10px] text-indigo-300 transition">
+                +1 Thn
+              </button>
+              <button @click="toggleSnifferForLicense(lic)" class="px-2 py-0.5 border rounded text-[10px] transition" :class="lic.allowSniffer ? 'bg-cyan-500/10 text-cyan-300 border-cyan-500/30' : 'bg-slate-800 text-slate-400 border-slate-700'">
+                {{ lic.allowSniffer ? 'Tutup Sniffer' : 'Buka Sniffer' }}
+              </button>
+            </div>
+
+            <button @click="deleteLicense(lic.deviceId)" class="text-rose-400 hover:text-rose-300 text-[11px] px-2 py-0.5 transition">
+              <i class="fa-solid fa-trash-can mr-1"></i>Hapus
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================== TAB 4: KONTROL SISTEM ================== -->
+      <section v-if="activeTab === 'settings'" class="space-y-3">
+        <div class="glass-card rounded-xl p-4 border border-slate-700/80 space-y-4">
+          <div class="flex items-center space-x-2 text-sm font-bold text-white border-b border-slate-700/80 pb-2">
+            <i class="fa-solid fa-shield-halved text-indigo-400"></i>
+            <span>Saklar Darurat & Pengaturan Global</span>
+          </div>
+
+          <!-- Kill Switch -->
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-xs font-bold text-white">Master KillSwitch</div>
+              <div class="text-[10px] text-slate-400">Matikan seluruh akses lisensi di semua aplikasi sekaligus jika darurat.</div>
+            </div>
+            <button 
+              @click="toggleKillSwitch" 
+              class="w-12 h-6 rounded-full transition relative flex items-center px-1"
+              :class="db.killSwitch ? 'bg-rose-600' : 'bg-slate-700'">
+              <div class="w-4 h-4 rounded-full bg-white transition transform" :class="{'translate-x-6': db.killSwitch}"></div>
+            </button>
+          </div>
+
+          <!-- Master Allow All -->
+          <div class="flex items-center justify-between pt-3 border-t border-slate-800">
+            <div>
+              <div class="text-xs font-bold text-white">Master Allow All</div>
+              <div class="text-[10px] text-slate-400">Izinkan semua perangkat otomatis aktif tanpa perlu request izin.</div>
+            </div>
+            <span class="text-xs font-mono" :class="db.masterAllowAll ? 'text-emerald-400' : 'text-slate-500'">
+              {{ db.masterAllowAll ? 'AKTIF' : 'NONAKTIF' }}
+            </span>
+          </div>
+
+          <!-- Master Allow Sniffer -->
+          <div class="flex items-center justify-between pt-3 border-t border-slate-800">
+            <div>
+              <div class="text-xs font-bold text-white">Master Allow Sniffer</div>
+              <div class="text-[10px] text-slate-400">Buka akses fitur App Sniffer untuk semua pengguna tanpa whitelist.</div>
+            </div>
+            <span class="text-xs font-mono" :class="db.masterAllowSniffer ? 'text-emerald-400' : 'text-slate-500'">
+              {{ db.masterAllowSniffer ? 'AKTIF' : 'NONAKTIF' }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Info Server & GitHub -->
+        <div class="bg-slate-800/40 rounded-xl p-3 border border-slate-700/60 text-[11px] text-slate-400 space-y-1">
+          <div class="flex justify-between">
+            <span>Server KV Auth:</span>
+            <span class="text-indigo-400 font-mono">xfinder-auth.dorxl.workers.dev</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Status Backup GitHub:</span>
+            <span class="text-emerald-400 font-mono">lutfiwidianto/x-finder-releases</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <transition name="fade">
+      <div v-if="toastMessage" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 glass-card px-4 py-2.5 rounded-full border border-indigo-500/40 text-xs font-medium text-white shadow-2xl flex items-center space-x-2">
+        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+        <span>{{ toastMessage }}</span>
+      </div>
+    </transition>
+
+  </div>
+
+  <!-- VUE 3 APPLICATION SCRIPT -->
+  <script>
+    const { createApp, ref, computed, onMounted } = Vue;
+
+    createApp({
+      setup() {
+        const CF_WORKER_URL = "https://xfinder-auth.dorxl.workers.dev";
+        const CF_ADMIN_KEY = "xfinder_admin_sec_99283_widianto";
+
+        const db = ref({
+          licenses: [],
+          pendingRequests: [],
+          pendingSnifferRequests: [],
+          bannedDevices: [],
+          snifferWhitelistedDevices: [],
+          killSwitch: false,
+          masterAllowAll: false,
+          masterAllowSniffer: false
+        });
+
+        const activeTab = ref('pending');
+        const searchQuery = ref('');
+        const loading = ref(false);
+        const actionLoading = ref(false);
+        const toastMessage = ref('');
+        const approvalConfigs = ref({});
+
+        // Initialize Telegram WebApp
+        onMounted(() => {
+          if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+            window.Telegram.WebApp.expand();
+          }
+          fetchData();
+        });
+
+        const triggerHaptic = (type = 'light') => {
+          if (window.Telegram?.WebApp?.HapticFeedback) {
+            if (type === 'success') {
+              window.Telegram.WebApp.HapticFeedback.notificationOccurred('success');
+            } else {
+              window.Telegram.WebApp.HapticFeedback.impactOccurred(type);
+            }
+          }
+        };
+
+        const showToast = (msg) => {
+          toastMessage.value = msg;
+          triggerHaptic('success');
+          setTimeout(() => {
+            toastMessage.value = '';
+          }, 2400);
+        };
+
+        const copyText = (txt) => {
+          navigator.clipboard.writeText(txt);
+          showToast(`Disalin: ${txt}`);
+        };
+
+        const getApprovalConfig = (deviceId) => {
+          if (!approvalConfigs.value[deviceId]) {
+            approvalConfigs.value[deviceId] = {
+              duration: '30',
+              isVip: true,
+              allowSniffer: false
+            };
+          }
+          return approvalConfigs.value[deviceId];
+        };
+
+        // Fetch Data from Cloudflare Worker
+        const fetchData = async (manual = false) => {
+          loading.value = true;
+          try {
+            const res = await fetch(`${CF_WORKER_URL}/admin/export`, {
+              headers: { "X-Admin-Key": CF_ADMIN_KEY }
+            });
+            if (res.ok) {
+              const data = await res.json();
+              db.value = {
+                licenses: data.licenses || [],
+                pendingRequests: data.pendingRequests || [],
+                pendingSnifferRequests: data.pendingSnifferRequests || [],
+                bannedDevices: data.bannedDevices || [],
+                snifferWhitelistedDevices: data.snifferWhitelistedDevices || [],
+                killSwitch: !!data.killSwitch,
+                masterAllowAll: !!data.masterAllowAll,
+                masterAllowSniffer: !!data.masterAllowSniffer
+              };
+              if (manual) showToast("Data diperbarui realtime!");
+            }
+          } catch (e) {
+            console.error(e);
+          } finally {
+            loading.value = false;
+          }
+        };
+
+        // Compute expiry date string from days
+        const calculateExpiry = (daysOrLifetime) => {
+          if (daysOrLifetime === 'lifetime') return 'lifetime';
+          const days = parseInt(daysOrLifetime) || 30;
+          const target = new Date();
+          target.setDate(target.getDate() + days);
+          return target.toISOString().split('T')[0];
+        };
+
+        // Approve Single License Request
+        const approveLicense = async (item) => {
+          actionLoading.value = true;
+          triggerHaptic('medium');
+          const cfg = getApprovalConfig(item.deviceId);
+          const expiryDate = calculateExpiry(cfg.duration);
+
+          const newLicense = {
+            deviceId: item.deviceId,
+            ownerName: item.username || '@user',
+            expiryDate: expiryDate,
+            isVip: cfg.isVip,
+            isBanned: false,
+            allowSniffer: cfg.allowSniffer,
+            note: `Approved via WebApp on ${new Date().toLocaleDateString()}`
+          };
+
+          try {
+            // 1. Tambah lisensi
+            await fetch(`${CF_WORKER_URL}/admin/license`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify(newLicense)
+            });
+
+            // 2. Jika izin sniffer dicentang, update sniffer whitelist
+            if (cfg.allowSniffer) {
+              await fetch(`${CF_WORKER_URL}/admin/sniffer`, {
+                method: 'POST',
+                headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ deviceId: item.deviceId, enabled: true })
+              });
+            }
+
+            // 3. Hapus dari antrean pendingRequests
+            const updatedPending = db.value.pendingRequests.filter(p => p.deviceId !== item.deviceId);
+            await fetch(`${CF_WORKER_URL}/admin/pending`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pendingRequests: updatedPending })
+            });
+
+            // Update state lokal seketika
+            db.value.pendingRequests = updatedPending;
+            const existingIdx = db.value.licenses.findIndex(l => l.deviceId === item.deviceId);
+            if (existingIdx >= 0) {
+              db.value.licenses[existingIdx] = newLicense;
+            } else {
+              db.value.licenses.unshift(newLicense);
+            }
+
+            showToast(`Izin ${item.username || item.deviceId} disetujui!`);
+          } catch (e) {
+            alert(`Gagal menyetujui: ${e.message}`);
+          } finally {
+            actionLoading.value = false;
+          }
+        };
+
+        // Batch Approve All
+        const batchApproveAll = async () => {
+          if (!confirm(`Setujui seluruh ${db.value.pendingRequests.length} antrean lisensi sekaligus selama 30 Hari?`)) return;
+          actionLoading.value = true;
+          triggerHaptic('heavy');
+
+          try {
+            for (const item of [...db.value.pendingRequests]) {
+              const newLicense = {
+                deviceId: item.deviceId,
+                ownerName: item.username || '@user',
+                expiryDate: calculateExpiry('30'),
+                isVip: true,
+                isBanned: false,
+                allowSniffer: false,
+                note: 'Batch approved via WebApp'
+              };
+
+              await fetch(`${CF_WORKER_URL}/admin/license`, {
+                method: 'POST',
+                headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+                body: JSON.stringify(newLicense)
+              });
+
+              db.value.licenses.unshift(newLicense);
+            }
+
+            // Kosongkan antrean di Cloudflare
+            await fetch(`${CF_WORKER_URL}/admin/pending`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pendingRequests: [] })
+            });
+
+            db.value.pendingRequests = [];
+            showToast("Seluruh antrean berhasil disetujui!");
+          } catch (e) {
+            alert(`Error: ${e.message}`);
+          } finally {
+            actionLoading.value = false;
+          }
+        };
+
+        // Reject Pending License
+        const rejectPending = async (deviceId) => {
+          if (!confirm(`Tolak dan hapus antrean perangkat ${deviceId}?`)) return;
+          actionLoading.value = true;
+          try {
+            const updatedPending = db.value.pendingRequests.filter(p => p.deviceId !== deviceId);
+            await fetch(`${CF_WORKER_URL}/admin/pending`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pendingRequests: updatedPending })
+            });
+            db.value.pendingRequests = updatedPending;
+            showToast("Antrean ditolak.");
+          } catch (e) {
+            alert(e.message);
+          } finally {
+            actionLoading.value = false;
+          }
+        };
+
+        // Approve Sniffer Request
+        const approveSniffer = async (deviceId) => {
+          actionLoading.value = true;
+          try {
+            await fetch(`${CF_WORKER_URL}/admin/sniffer`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ deviceId, enabled: true })
+            });
+
+            const updatedSniffer = db.value.pendingSnifferRequests.filter(p => p.deviceId !== deviceId);
+            await fetch(`${CF_WORKER_URL}/admin/pending_sniffer`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pendingSnifferRequests: updatedSniffer })
+            });
+
+            db.value.pendingSnifferRequests = updatedSniffer;
+            showToast("Izin App Sniffer VIP diberikan!");
+          } catch (e) {
+            alert(e.message);
+          } finally {
+            actionLoading.value = false;
+          }
+        };
+
+        // Reject Sniffer Request
+        const rejectSniffer = async (deviceId) => {
+          actionLoading.value = true;
+          try {
+            const updatedSniffer = db.value.pendingSnifferRequests.filter(p => p.deviceId !== deviceId);
+            await fetch(`${CF_WORKER_URL}/admin/pending_sniffer`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ pendingSnifferRequests: updatedSniffer })
+            });
+            db.value.pendingSnifferRequests = updatedSniffer;
+            showToast("Request Sniffer ditolak.");
+          } catch (e) {
+            alert(e.message);
+          } finally {
+            actionLoading.value = false;
+          }
+        };
+
+        // Extend License
+        const extendLicense = async (lic, days) => {
+          actionLoading.value = true;
+          try {
+            let baseDate = new Date();
+            if (lic.expiryDate && lic.expiryDate !== 'lifetime') {
+              const currentExp = new Date(lic.expiryDate);
+              if (currentExp > baseDate) baseDate = currentExp;
+            }
+            baseDate.setDate(baseDate.getDate() + days);
+            const newExp = baseDate.toISOString().split('T')[0];
+
+            lic.expiryDate = newExp;
+            await fetch(`${CF_WORKER_URL}/admin/license`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify(lic)
+            });
+            showToast(`Diperpanjang s/d ${newExp}`);
+          } catch (e) {
+            alert(e.message);
+          } finally {
+            actionLoading.value = false;
+          }
+        };
+
+        // Toggle Sniffer for active license
+        const toggleSnifferForLicense = async (lic) => {
+          lic.allowSniffer = !lic.allowSniffer;
+          try {
+            await fetch(`${CF_WORKER_URL}/admin/sniffer`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ deviceId: lic.deviceId, enabled: lic.allowSniffer })
+            });
+            await fetch(`${CF_WORKER_URL}/admin/license`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify(lic)
+            });
+            showToast(lic.allowSniffer ? "Akses Sniffer Dibuka" : "Akses Sniffer Ditutup");
+          } catch (e) {
+            alert(e.message);
+          }
+        };
+
+        // Delete License
+        const deleteLicense = async (deviceId) => {
+          if (!confirm(`Hapus lisensi perangkat ${deviceId}?`)) return;
+          try {
+            await fetch(`${CF_WORKER_URL}/admin/delete`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ deviceId })
+            });
+            db.value.licenses = db.value.licenses.filter(l => l.deviceId !== deviceId);
+            showToast("Lisensi dihapus.");
+          } catch (e) {
+            alert(e.message);
+          }
+        };
+
+        // Toggle Kill Switch
+        const toggleKillSwitch = async () => {
+          const nextState = !db.value.killSwitch;
+          if (nextState && !confirm("PERINGATAN: Mengaktifkan KillSwitch akan memutus akses seluruh perangkat seketika! Lanjutkan?")) return;
+          try {
+            await fetch(`${CF_WORKER_URL}/admin/killswitch`, {
+              method: 'POST',
+              headers: { 'X-Admin-Key': CF_ADMIN_KEY, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ enabled: nextState })
+            });
+            db.value.killSwitch = nextState;
+            showToast(nextState ? "KillSwitch Diaktifkan" : "KillSwitch Dimatikan");
+          } catch (e) {
+            alert(e.message);
+          }
+        };
+
+        // Filtered computed lists
+        const filteredPending = computed(() => {
+          const q = searchQuery.value.trim().toLowerCase();
+          if (!q) return db.value.pendingRequests || [];
+          return (db.value.pendingRequests || []).filter(item => 
+            (item.deviceId && item.deviceId.toLowerCase().includes(q)) ||
+            (item.username && item.username.toLowerCase().includes(q)) ||
+            (item.name && item.name.toLowerCase().includes(q))
+          );
+        });
+
+        const filteredSniffer = computed(() => {
+          const q = searchQuery.value.trim().toLowerCase();
+          if (!q) return db.value.pendingSnifferRequests || [];
+          return (db.value.pendingSnifferRequests || []).filter(item => 
+            (item.deviceId && item.deviceId.toLowerCase().includes(q)) ||
+            (item.username && item.username.toLowerCase().includes(q)) ||
+            (item.name && item.name.toLowerCase().includes(q))
+          );
+        });
+
+        const filteredLicenses = computed(() => {
+          const q = searchQuery.value.trim().toLowerCase();
+          if (!q) return db.value.licenses || [];
+          return (db.value.licenses || []).filter(item => 
+            (item.deviceId && item.deviceId.toLowerCase().includes(q)) ||
+            (item.ownerName && item.ownerName.toLowerCase().includes(q))
+          );
+        });
+
+        return {
+          db,
+          activeTab,
+          searchQuery,
+          loading,
+          actionLoading,
+          toastMessage,
+          getApprovalConfig,
+          fetchData,
+          approveLicense,
+          batchApproveAll,
+          rejectPending,
+          approveSniffer,
+          rejectSniffer,
+          extendLicense,
+          toggleSnifferForLicense,
+          deleteLicense,
+          toggleKillSwitch,
+          copyText,
+          filteredPending,
+          filteredSniffer,
+          filteredLicenses
+        };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
